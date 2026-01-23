@@ -16,6 +16,7 @@ func _physics_process(delta: float) -> void:
 		Input.get_axis("ui_left", "ui_right"),
 		Input.get_axis("ui_up", "ui_down")
 	)
+	input_dir = Global.cartesian_to_isometric(input_dir)
 	
 	if input_dir != Vector2.ZERO:
 		input_dir = input_dir.normalized()
@@ -24,9 +25,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, ACCEL * delta)
 
+
 	move_and_slide()
 	camera_follow_player(delta)
-
 
 func camera_follow_player(delta: float) -> void:
 	player_camera.global_position = player_camera.global_position.lerp(
