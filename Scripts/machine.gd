@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Machine
 
 @export var placed: bool
 @export var player: CharacterBody2D

@@ -6,12 +6,25 @@ const ACCEL := 1200.0
 @export var player_camera: Camera2D
 @export var camera_follow_speed := 5.0
 
+var machine_scene = preload("res://Scenes/machine.tscn").instantiate()
+
 
 func _ready() -> void:
 	player_camera.global_position = global_position
 
 
 func _physics_process(delta: float) -> void:
+	
+	if Global.night:
+		night_mode()
+	else:
+		$Sprite2D.show()
+	
+	if Input.is_action_just_pressed("ui_accept"):
+		Global.night = not Global.night
+		
+	
+	
 	var input_dir := Vector2(
 		Input.get_axis("ui_left", "ui_right"),
 		Input.get_axis("ui_up", "ui_down")
@@ -34,3 +47,6 @@ func camera_follow_player(delta: float) -> void:
 		global_position,
 		camera_follow_speed * delta
 	)
+
+func night_mode():
+	$Sprite2D.hide()

@@ -1,10 +1,12 @@
 extends Node
 
 const RATIO: Vector2i = Vector2i(7, 8)
-const TILE_SIZE: Vector2 = Vector2(56, 34)
+const TILE_SIZE: Vector2 = Vector2(56, 36.5)
 
 const GRID_SIZE: Vector2 = Vector2(112, 128)
 const HALF_GRID = GRID_SIZE / 2
+
+var night = false
 
 func cartesian_to_isometric(cartesian: Vector2) -> Vector2:
 	var iso = Vector2()
