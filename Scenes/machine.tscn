@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx8jjvuqessli"]
+
+[ext_resource type="Script" uid="uid://v6vl0cvw2mn1" path="res://scripts/machine.gd" id="1_h612m"]
+[ext_resource type="Texture2D" uid="uid://c42xpy8wyjsar" path="res://Resources/Sprites/Machines/test_machine.png" id="1_xuuum"]
+
+[node name="Machine" type="StaticBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_h612m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xuuum")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+y_sort_enabled = true
+polygon = PackedVector2Array(55, 32, 0, 1, -55, 32, 0, 63)

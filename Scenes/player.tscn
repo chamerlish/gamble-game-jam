@@ -10,4 +10,5 @@ script = ExtResource("1_cvnsp")
 texture = ExtResource("1_v0iea")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+y_sort_enabled = true
 polygon = PackedVector2Array(55, 32, 0, 1, -55, 32, 0, 63)
