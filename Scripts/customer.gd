@@ -10,6 +10,12 @@ enum State {
 	Playing
 }
 
+enum Class {
+	Broke, 
+	Middle,
+	Rich
+}
+
 func _ready() -> void:
 	GlobalMachine.customer_list.append(self)
 

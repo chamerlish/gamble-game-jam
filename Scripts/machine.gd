@@ -14,6 +14,8 @@ class_name Machine
 @export var machine_name: String
 @export var odds_of_winning: float
 @export var prize_money: int
+@export var price: int = 100
+
 
 var available = true
 
@@ -51,3 +53,12 @@ func place_machine():
 	Global.camera_node.trigger_shake()
 	GlobalMachine.placed_machine_list.append(self)
 	GlobalMachine.available_machine_list.append(self)
+	loose_money(price)
+
+func loose_money(amount: int):
+	$MoneyLossText.text = "- " + str(amount) + " $"
+	$AnimationPlayer.play("money_loss")
+
+func win_money(amount: float):
+	$MoneyGainText.text = "+ " + str(amount) + " $"
+	$AnimationPlayer.play("money_gain")
