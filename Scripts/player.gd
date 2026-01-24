@@ -6,8 +6,7 @@ const ACCEL := 1200.0
 @export var player_camera: Camera2D
 @export var camera_follow_speed := 5.0
 
-var machine_scene = preload("res://Scenes/machine.tscn").instantiate()
-
+var selected_machine: Machine
 
 func _ready() -> void:
 	player_camera.global_position = global_position
@@ -22,16 +21,15 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		Global.night = not Global.night
-		
-	
+		clear_selected_machine()
 	
 	var input_dir := Vector2(
-		Input.get_axis("ui_left", "ui_right"),
-		Input.get_axis("ui_up", "ui_down")
+		Input.get_axis("move_left", "move_right"),
+		Input.get_axis("move_up", "move_down")
 	)
 	input_dir = Global.cartesian_to_isometric(input_dir)
 	
-	if input_dir != Vector2.ZERO:
+	if input_dir != Vector2.ZERO and not Global.night:
 		input_dir = input_dir.normalized()
 		var target_velocity = input_dir * SPEED
 		velocity = velocity.move_toward(target_velocity, ACCEL * delta)
@@ -50,3 +48,23 @@ func camera_follow_player(delta: float) -> void:
 
 func night_mode():
 	$Sprite2D.hide()
+	if (Input.is_action_just_pressed("ui_up")):
+		pick_machine(0)
+		
+	if (Input.is_action_just_pressed("ui_right")):
+		pick_machine(1)
+		
+	if (Input.is_action_just_pressed("ui_left")):
+		pick_machine(2)
+
+
+func pick_machine(id: int):
+	clear_selected_machine()
+
+	selected_machine = GlobalMachine.machine_list[id].instantiate()
+	selected_machine.player = self  
+	get_tree().get_root().add_child(selected_machine)
+
+func clear_selected_machine():
+	if selected_machine and selected_machine.placed == false:
+		selected_machine.queue_free()

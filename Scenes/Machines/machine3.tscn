@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4y6t7kpbfmaq"]
+
+[ext_resource type="Script" uid="uid://v6vl0cvw2mn1" path="res://Scripts/machine.gd" id="1_4oc42"]
+[ext_resource type="Texture2D" uid="uid://sdfsmxgv00xm" path="res://abstractTile_31.png" id="2_4oc42"]
+
+[node name="Machine" type="StaticBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_4oc42")
+placed = null
+machine_name = null
+odds_of_winning = null
+prize_money = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4oc42")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+y_sort_enabled = true
+polygon = PackedVector2Array(55, 32, 0, 1, -55, 32, 0, 63)

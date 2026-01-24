@@ -1,13 +1,20 @@
-extends Machine
+extends StaticBody2D
+
+
+class_name Machine
+
 
 @export var placed: bool
 @export var player: CharacterBody2D
-@export var machine: Machine
-
-
+# @export var machine: Machine
 
 @onready var collision: CollisionPolygon2D = $CollisionPolygon2D
 @onready var sprite: Sprite2D = $Sprite2D
+
+@export var texture: CompressedTexture2D
+@export var machine_name: String
+@export var odds_of_winning: float
+@export var prize_money: int
 
 
 
