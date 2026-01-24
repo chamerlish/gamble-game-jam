@@ -18,6 +18,8 @@ func cartesian_to_isometric(cartesian: Vector2) -> Vector2:
 	iso.y = (cartesian.x + cartesian.y) * TILE_SIZE.y / RATIO.y
 	return iso
 
+var player_node: CharacterBody2D
+
 # To go from day to night and from night to day
 func change_night_state():
 	night = not Global.night

@@ -6,10 +6,6 @@
 [node name="Machine" type="StaticBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_fj3lg")
-placed = null
-machine_name = null
-odds_of_winning = null
-prize_money = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_fj3lg")

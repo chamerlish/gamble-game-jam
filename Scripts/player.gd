@@ -11,6 +11,12 @@ var selected_machine: Machine
 var post_transition_can_show: bool
 
 func _ready() -> void:
+	
+
+	
+	Global.player_node = self
+	print(self)
+	
 	player_camera.global_position = global_position
 
 	GlobalMachine.selected_machine_changed.connect(pick_machine)
@@ -25,7 +31,8 @@ func switch_player_state():
 	clear_selected_machine()
 	
 func _physics_process(delta: float) -> void:
-	
+	print(velocity)
+	z_index = GlobalMachine.get_entity_z(self)
 #	if Global.night:
 #		night_mode()
 #	else:
@@ -67,7 +74,7 @@ func pick_machine(id: int):
 	clear_selected_machine()
 	print(id)
 	selected_machine = GlobalMachine.machine_list[id].instantiate()
-	selected_machine.player = self  
+
 	get_tree().get_root().add_child(selected_machine)
 
 func clear_selected_machine():

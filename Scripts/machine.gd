@@ -5,7 +5,6 @@ class_name Machine
 
 
 @export var placed: bool
-@export var player: CharacterBody2D
 # @export var machine: Machine
 
 @onready var collision: CollisionPolygon2D = $CollisionPolygon2D
@@ -23,12 +22,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if player.global_position.y > global_position.y: # the player is below the machine
-		z_index = 0
-	else: # the player is above the machine
-		z_index = 2
-		
-
+	z_index = GlobalMachine.get_entity_z(self)
 	
 	if placed == false:
 		placable_mode()
@@ -36,9 +30,7 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("click") and not placed:
-		placed = true
-		collision.disabled = false
-		sprite.modulate.a = 1
+		place_machine()
 		
 func placable_mode():
 	var mouse_pos = get_global_mouse_position().snapped(Global.TILE_SIZE)
@@ -48,3 +40,8 @@ func placable_mode():
 	
 	global_position = mouse_pos
 	
+func place_machine():
+	placed = true
+	collision.disabled = false
+	sprite.modulate.a = 1
+	GlobalMachine.placed_machine_list.append(self)

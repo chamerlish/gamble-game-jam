@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2xmikhqsgk1r"]
+
+[ext_resource type="Script" uid="uid://bpucnc4dxkm3l" path="res://Scripts/customer.gd" id="1_7c3kf"]
+[ext_resource type="Texture2D" uid="uid://o30hj0uflnjy" path="res://abstractTile_22.png" id="1_fp685"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_au6nw"]
+
+[node name="Customer" type="CharacterBody2D"]
+script = ExtResource("1_7c3kf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_au6nw")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fp685")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
