@@ -11,6 +11,10 @@ signal begin_switch_night_state
 signal finish_switch_night_state
 signal mid_switch_night_state
 
+var camera_node: Camera2D
+
+
+
 func cartesian_to_isometric(cartesian: Vector2) -> Vector2:
 	var iso = Vector2()
 	

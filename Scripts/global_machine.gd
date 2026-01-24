@@ -8,9 +8,13 @@ var machine_list: Array[PackedScene] = [
 	preload("res://Scenes/Machines/machine3.tscn")
 ]
 
+
+
 var entity_list: Array[Node2D]
 
+var customer_list: Array[Node2D]
 var placed_machine_list: Array[Machine] = []
+var available_machine_list: Array[Machine] = []
 
 func change_selected_machine(machine_id: int):
 	selected_machine_changed.emit(machine_id)
@@ -22,7 +26,12 @@ func get_machine_icon(machine_id: int) -> Texture2D:
 func get_entity_z(entity: Node2D) -> int:
 	entity_list = []
 	for machine in placed_machine_list:
-		entity_list.append(machine)
+		if machine: # if they might get deleted midway CMON IK THIS IS MESSY BUT WHATEVER
+			entity_list.append(machine)
+		
+	for customer in customer_list:
+		if customer:
+			entity_list.append(customer)
 	
 	entity_list.append(Global.player_node)
 	
@@ -41,3 +50,4 @@ func get_entity_z(entity: Node2D) -> int:
 # biggest to smallest
 func sort_y_placed_machine(list):
 	list.sort_custom(func(a, b): return a.position.y < b.position.y)
+	

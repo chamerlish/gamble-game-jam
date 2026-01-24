@@ -3,9 +3,6 @@ extends CharacterBody2D
 const SPEED := 200.0
 const ACCEL := 1200.0
 
-@export var player_camera: Camera2D
-@export var camera_follow_speed := 5.0
-
 var selected_machine: Machine
 
 var post_transition_can_show: bool
@@ -15,9 +12,8 @@ func _ready() -> void:
 
 	
 	Global.player_node = self
-	print(self)
 	
-	player_camera.global_position = global_position
+
 
 	GlobalMachine.selected_machine_changed.connect(pick_machine)
 	Global.mid_switch_night_state.connect(switch_player_state)
@@ -31,7 +27,6 @@ func switch_player_state():
 	clear_selected_machine()
 	
 func _physics_process(delta: float) -> void:
-	print(velocity)
 	z_index = GlobalMachine.get_entity_z(self)
 #	if Global.night:
 #		night_mode()
@@ -58,13 +53,8 @@ func _physics_process(delta: float) -> void:
 
 
 	move_and_slide()
-	camera_follow_player(delta)
+	
 
-func camera_follow_player(delta: float) -> void:
-	player_camera.global_position = player_camera.global_position.lerp(
-		global_position,
-		camera_follow_speed * delta
-	)
 
 func night_mode():
 	$Sprite2D.hide()
@@ -72,7 +62,6 @@ func night_mode():
 
 func pick_machine(id: int):
 	clear_selected_machine()
-	print(id)
 	selected_machine = GlobalMachine.machine_list[id].instantiate()
 
 	get_tree().get_root().add_child(selected_machine)
