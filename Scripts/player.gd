@@ -8,21 +8,33 @@ const ACCEL := 1200.0
 
 var selected_machine: Machine
 
+var post_transition_can_show: bool
+
 func _ready() -> void:
 	player_camera.global_position = global_position
 
 	GlobalMachine.selected_machine_changed.connect(pick_machine)
-
-func _physics_process(delta: float) -> void:
+	Global.mid_switch_night_state.connect(switch_player_state)
 	
+func switch_player_state():
 	if Global.night:
 		night_mode()
 	else:
 		$Sprite2D.show()
 	
+	clear_selected_machine()
+	
+func _physics_process(delta: float) -> void:
+	
+#	if Global.night:
+#		night_mode()
+#	else:
+#		if post_transition_can_show:
+#			$Sprite2D.show()
+	
 	if Input.is_action_just_pressed("ui_accept"):
 		Global.change_night_state()
-		clear_selected_machine()
+		
 	
 	var input_dir := Vector2(
 		Input.get_axis("move_left", "move_right"),
@@ -49,14 +61,6 @@ func camera_follow_player(delta: float) -> void:
 
 func night_mode():
 	$Sprite2D.hide()
-	if (Input.is_action_just_pressed("ui_up")):
-		pick_machine(0)
-		
-	if (Input.is_action_just_pressed("ui_right")):
-		pick_machine(1)
-		
-	if (Input.is_action_just_pressed("ui_left")):
-		pick_machine(2)
 
 
 func pick_machine(id: int):

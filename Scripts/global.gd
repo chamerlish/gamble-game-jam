@@ -7,6 +7,9 @@ const GRID_SIZE: Vector2 = Vector2(112, 128)
 const HALF_GRID = GRID_SIZE / 2
 
 var night = false
+signal begin_switch_night_state
+signal finish_switch_night_state
+signal mid_switch_night_state
 
 func cartesian_to_isometric(cartesian: Vector2) -> Vector2:
 	var iso = Vector2()
@@ -18,4 +21,6 @@ func cartesian_to_isometric(cartesian: Vector2) -> Vector2:
 # To go from day to night and from night to day
 func change_night_state():
 	night = not Global.night
+	begin_switch_night_state.emit()
+
 	

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwxbt4jfavhmt"]
+
+[ext_resource type="Shader" uid="uid://dqvckay64p3nx" path="res://Scenes/UI/transition_scene.gdshader" id="1_7k3wa"]
+[ext_resource type="Script" uid="uid://bhju2u81372uv" path="res://Scenes/UI/transition_scene.gd" id="2_gv60l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gv60l"]
+shader = ExtResource("1_7k3wa")
+shader_parameter/AspectRatio = 1.5
+shader_parameter/Diamonds = 10.0
+shader_parameter/pixel_size = 0.08
+shader_parameter/height = -1.0
+shader_parameter/disable_pixel = false
+
+[node name="TransitionScene" type="ColorRect"]
+z_index = 10
+material = SubResource("ShaderMaterial_gv60l")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 324)
+color = Color(0.08513356, 0.13278234, 0.36384156, 1)
+script = ExtResource("2_gv60l")
+metadata/_edit_use_anchors_ = true
