@@ -26,6 +26,7 @@ var player_node: CharacterBody2D
 
 # To go from day to night and from night to day
 func change_night_state():
+	camera_node.trigger_shake(5.0)
 	night = not Global.night
 	begin_switch_night_state.emit()
 

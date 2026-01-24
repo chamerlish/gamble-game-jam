@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED := 200.0
+const SPEED := 1000.0
 const ACCEL := 1200.0
 
 var selected_machine: Machine
