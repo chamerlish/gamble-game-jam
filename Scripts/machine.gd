@@ -16,6 +16,10 @@ class_name Machine
 @export var odds_of_winning: float
 @export var prize_money: int
 
+func _ready() -> void:
+	# TODO: fix this
+	texture = $Sprite2D.texture
+	print(texture)
 
 
 func _process(delta: float) -> void:

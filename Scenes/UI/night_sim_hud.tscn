@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://lx7i37jmv8dj"]
+
+[ext_resource type="PackedScene" uid="uid://bnb3o1vl7dq6r" path="res://Scenes/Machines/machine_selection_button.tscn" id="1_0vmel"]
+
+[node name="NightSimHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MachineSelectionButton" parent="HBoxContainer" instance=ExtResource("1_0vmel")]
+layout_mode = 2
+machine_id = 0
+
+[node name="MachineSelectionButton2" parent="HBoxContainer" instance=ExtResource("1_0vmel")]
+layout_mode = 2
+
+[node name="MachineSelectionButton3" parent="HBoxContainer" instance=ExtResource("1_0vmel")]
+layout_mode = 2
+machine_id = 2

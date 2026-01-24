@@ -11,6 +11,7 @@ var selected_machine: Machine
 func _ready() -> void:
 	player_camera.global_position = global_position
 
+	GlobalMachine.selected_machine_changed.connect(pick_machine)
 
 func _physics_process(delta: float) -> void:
 	
@@ -20,7 +21,7 @@ func _physics_process(delta: float) -> void:
 		$Sprite2D.show()
 	
 	if Input.is_action_just_pressed("ui_accept"):
-		Global.night = not Global.night
+		Global.change_night_state()
 		clear_selected_machine()
 	
 	var input_dir := Vector2(
@@ -60,7 +61,7 @@ func night_mode():
 
 func pick_machine(id: int):
 	clear_selected_machine()
-
+	print(id)
 	selected_machine = GlobalMachine.machine_list[id].instantiate()
 	selected_machine.player = self  
 	get_tree().get_root().add_child(selected_machine)

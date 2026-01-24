@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnb3o1vl7dq6r"]
+
+[ext_resource type="Script" uid="uid://csejebpvy41nk" path="res://Scripts/machine_selection_button.gd" id="1_0mkwh"]
+
+[sub_resource type="Theme" id="Theme_0mkwh"]
+
+[node name="MachineSelectionButton" type="Button"]
+offset_right = 54.0
+offset_bottom = 70.0
+script = ExtResource("1_0mkwh")
+machine_id = 1
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0mkwh")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
