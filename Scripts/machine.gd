@@ -9,23 +9,35 @@ class_name Machine
 
 @onready var collision: CollisionPolygon2D = $CollisionPolygon2D
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var panel_tweak: Panel = $HUD/Panel
+
 
 @export var texture: CompressedTexture2D
 @export var machine_name: String
-@export var odds_of_winning: float
-@export var prize_money: int
+@export var odds_of_winning: float = 0.1
+@export var prize_money: int = 100
 @export var price: int = 100
 
 
 var available = true
+var mouse_inside := false
 
 func _ready() -> void:
+	panel_tweak.hide()
 	# TODO: fix this
 	texture = $Sprite2D.texture
 	print(texture)
 
 
 func _process(delta: float) -> void:
+	if mouse_inside:
+		if Input.is_action_just_pressed("click"):
+			panel_tweak.show()
+	
+	else:
+		panel_tweak.hide()
+	
+	$HUD/Panel/ProgressBar.value = $HUD/Panel/Slider.value
 	z_index = GlobalMachine.get_entity_z(self)
 	
 	if placed == false:
@@ -55,10 +67,28 @@ func place_machine():
 	GlobalMachine.available_machine_list.append(self)
 	loose_money(price)
 
+
+@onready var money_loss_label = $HUD/MoneyLossText
+@onready var money_gain_label = $HUD/MoneyGainText
+
 func loose_money(amount: int):
-	$MoneyLossText.text = "- " + str(amount) + " $"
+	money_loss_label.position.x = get_global_mouse_position().x
+	money_loss_label.text = "- " + str(amount) + " $"
 	$AnimationPlayer.play("money_loss")
 
 func win_money(amount: float):
-	$MoneyGainText.text = "+ " + str(amount) + " $"
+	money_gain_label.position.x = get_global_mouse_position().x
+	money_gain_label.text = "+ " + str(amount) + " $"
 	$AnimationPlayer.play("money_gain")
+
+
+func _on_mouse_tweak_area_mouse_entered() -> void:
+	mouse_inside = true
+
+
+func _on_mouse_tweak_area_mouse_exited() -> void:
+	mouse_inside = false
+
+
+func _on_slider_drag_ended(value_changed: bool) -> void:
+	odds_of_winning = panel_tweak.get_node("Slider").value / 100

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c1ejq1xu677pa"]
+[gd_scene load_steps=10 format=3 uid="uid://c1ejq1xu677pa"]
 
 [ext_resource type="Script" uid="uid://v6vl0cvw2mn1" path="res://Scripts/machine.gd" id="1_fj3lg"]
 [ext_resource type="Texture2D" uid="uid://dov80h01qigjx" path="res://abstractTile_25.png" id="2_fj3lg"]
@@ -9,7 +9,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MoneyLossText:modulate")
+tracks/0/path = NodePath("HUD/MoneyLossText:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -21,7 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MoneyLossText:position")
+tracks/1/path = NodePath("HUD/MoneyLossText:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -36,7 +36,7 @@ resource_name = "money_gain"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MoneyGainText:modulate")
+tracks/0/path = NodePath("HUD/MoneyGainText:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -48,7 +48,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MoneyGainText:position")
+tracks/1/path = NodePath("HUD/MoneyGainText:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -63,7 +63,7 @@ resource_name = "money_loss"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MoneyLossText:modulate")
+tracks/0/path = NodePath("HUD/MoneyLossText:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -75,7 +75,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MoneyLossText:position")
+tracks/1/path = NodePath("HUD/MoneyLossText:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -91,6 +91,11 @@ _data = {
 &"money_gain": SubResource("Animation_86igg"),
 &"money_loss": SubResource("Animation_txefx")
 }
+
+[sub_resource type="ImageTexture" id="ImageTexture_aoebm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aoebm"]
+size = Vector2(259, 175.5)
 
 [node name="Machine" type="StaticBody2D"]
 y_sort_enabled = true
@@ -108,9 +113,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_8nuxq")
 }
 
-[node name="MoneyGainText" type="RichTextLabel" parent="."]
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MoneyGainText" type="RichTextLabel" parent="HUD"]
 modulate = Color(1, 1, 1, 0)
 z_index = 100
+layout_mode = 0
 offset_right = 114.0
 offset_bottom = 78.0
 theme = ExtResource("3_aoebm")
@@ -118,8 +130,9 @@ theme_override_colors/default_color = Color(0, 0.7251751, 5.7756904e-07, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1
 
-[node name="MoneyLossText" type="RichTextLabel" parent="."]
+[node name="MoneyLossText" type="RichTextLabel" parent="HUD"]
 z_index = 100
+layout_mode = 0
 offset_top = 30.0
 offset_right = 114.0
 offset_bottom = 108.0
@@ -127,3 +140,57 @@ theme = ExtResource("3_aoebm")
 theme_override_colors/default_color = Color(0.8288101, 2.7193873e-06, 5.7756904e-07, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1
+
+[node name="Panel" type="Panel" parent="HUD"]
+layout_mode = 0
+offset_left = -101.0
+offset_top = -47.0
+offset_right = 104.0
+offset_bottom = 50.0
+theme = ExtResource("3_aoebm")
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.289
+anchor_right = 1.0
+anchor_bottom = 0.711
+offset_left = 9.0
+offset_top = 21.967
+offset_right = -11.0
+offset_bottom = 21.958992
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_aoebm")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HUD/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "loose chance:"
+
+[node name="Slider" type="HSlider" parent="HUD/Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 7.9629974
+offset_bottom = 35.962997
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_aoebm")
+theme_override_icons/grabber = SubResource("ImageTexture_aoebm")
+
+[node name="MouseTweakArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseTweakArea"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_aoebm")
+
+[connection signal="mouse_entered" from="MouseTweakArea" to="." method="_on_mouse_tweak_area_mouse_entered"]
+[connection signal="mouse_exited" from="MouseTweakArea" to="." method="_on_mouse_tweak_area_mouse_exited"]

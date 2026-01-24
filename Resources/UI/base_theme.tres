@@ -1,10 +1,19 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://d2s335cjhu88y"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://d2s335cjhu88y"]
 
 [ext_resource type="FontFile" uid="uid://c228k4y8g4c8r" path="res://Resources/UI/font.ttf" id="1_knl32"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knl32"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r71uw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2j3gs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v3rom"]
 bg_color = Color(0.5529412, 0.45490196, 0.32941177, 1)
 
 [resource]
 default_font = ExtResource("1_knl32")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_knl32")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_r71uw")
+HSlider/styles/slider = SubResource("StyleBoxFlat_2j3gs")
 Panel/styles/panel = SubResource("StyleBoxFlat_v3rom")

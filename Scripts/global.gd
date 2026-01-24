@@ -13,7 +13,7 @@ signal mid_switch_night_state
 
 var camera_node: Camera2D
 
-
+var amount_money: float
 
 func cartesian_to_isometric(cartesian: Vector2) -> Vector2:
 	var iso = Vector2()

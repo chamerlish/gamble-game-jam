@@ -8,12 +8,7 @@ var selected_machine: Machine
 var post_transition_can_show: bool
 
 func _ready() -> void:
-	
-
-	
 	Global.player_node = self
-	
-
 
 	GlobalMachine.selected_machine_changed.connect(pick_machine)
 	Global.mid_switch_night_state.connect(switch_player_state)
