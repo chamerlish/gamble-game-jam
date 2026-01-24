@@ -15,6 +15,8 @@ class_name Machine
 @export var odds_of_winning: float
 @export var prize_money: int
 
+var available = true
+
 func _ready() -> void:
 	# TODO: fix this
 	texture = $Sprite2D.texture
@@ -25,6 +27,7 @@ func _process(delta: float) -> void:
 	z_index = GlobalMachine.get_entity_z(self)
 	
 	if placed == false:
+		available = false
 		placable_mode()
 	
 
@@ -42,6 +45,9 @@ func placable_mode():
 	
 func place_machine():
 	placed = true
+	available = true
 	collision.disabled = false
 	sprite.modulate.a = 1
+	Global.camera_node.trigger_shake()
 	GlobalMachine.placed_machine_list.append(self)
+	GlobalMachine.available_machine_list.append(self)
