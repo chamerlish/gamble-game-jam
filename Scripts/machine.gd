@@ -26,6 +26,8 @@ var isDraggin: bool
 var available = true
 var mouse_inside := false
 
+var broken 
+
 
 
 func _ready() -> void:

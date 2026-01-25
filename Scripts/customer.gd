@@ -69,7 +69,9 @@ func get_random_machine() -> Machine:
 
 func _on_playing_timer_timeout() -> void:
 	machine_in_use.available = true
+	GlobalMachine.available_machine_list.append(machine_in_use)
+	
 	current_state = State.Wondering
-	machine_in_use.get_node("Sprite2D").modulate.r = 0
+	machine_in_use.get_node("Sprite2D").modulate.r = 0.5
 	print("done playing")
 	$WonderingMovingTimer.start()
