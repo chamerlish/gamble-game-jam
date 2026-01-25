@@ -20,4 +20,4 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_0mkwh")
 
-[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="button_down" from="." to="." method="_on_button_down"]

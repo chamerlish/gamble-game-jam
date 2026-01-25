@@ -35,7 +35,7 @@ func _on_interraction_collider_body_entered(body: Node2D) -> void:
 
 func _physics_process(delta: float) -> void:
 	z_index = GlobalMachine.get_entity_z(self)
-	print(z_index)
+
 	
 	match current_state:
 		State.Moving:

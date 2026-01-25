@@ -7,5 +7,9 @@ func _ready() -> void:
 	#$Sprite2D.texture = 
 	icon = GlobalMachine.get_machine_icon(machine_id)
 	
-func _on_pressed() -> void:
+
+
+func _on_button_down() -> void:
 	GlobalMachine.change_selected_machine(machine_id)
+
+	

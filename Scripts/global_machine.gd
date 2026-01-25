@@ -14,6 +14,7 @@ var entity_list: Array[Node2D]
 
 var customer_list: Array[Node2D]
 var placed_machine_list: Array[Machine] = []
+var all_machines_list: Array[Machine]
 var available_machine_list: Array[Machine] = []
 
 func change_selected_machine(machine_id: int):

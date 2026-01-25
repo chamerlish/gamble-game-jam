@@ -5,7 +5,6 @@ class_name Machine
 
 
 @export var placed: bool
-# @export var machine: Machine
 
 @onready var collision: CollisionPolygon2D = $CollisionPolygon2D
 @onready var sprite: Sprite2D = $Sprite2D
@@ -18,20 +17,28 @@ class_name Machine
 @export var prize_money: int = 100
 @export var price: int = 100
 
+# for the panel cuz when you drop it first it counts as drop
+var nums_of_clicks: int 
+
+var isDraggin: bool
+
 
 var available = true
 var mouse_inside := false
+
+
 
 func _ready() -> void:
 	panel_tweak.hide()
 	# TODO: fix this
 	texture = $Sprite2D.texture
-	print(texture)
+	GlobalMachine.all_machines_list.append(self)
 
 
 func _process(delta: float) -> void:
 	if mouse_inside:
-		if Input.is_action_just_pressed("click"):
+		nums_of_clicks += 1
+		if Input.is_action_just_pressed("click") and nums_of_clicks > 0:
 			panel_tweak.show()
 	
 	else:
@@ -40,13 +47,16 @@ func _process(delta: float) -> void:
 	$HUD/Panel/ProgressBar.value = $HUD/Panel/Slider.value
 	z_index = GlobalMachine.get_entity_z(self)
 	
+	if Input.is_action_pressed("click") and not placed:
+		placable_mode()
+		
 	if placed == false:
 		available = false
-		placable_mode()
+		
 	
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("click") and not placed:
+	if event.is_action_released("click") and not placed:
 		place_machine()
 		
 func placable_mode():
