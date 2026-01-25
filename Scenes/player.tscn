@@ -12,3 +12,9 @@ texture = ExtResource("2_cvnsp")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 y_sort_enabled = true
 polygon = PackedVector2Array(55, 32, 0, 1, -55, 32, 0, 63)
+
+[node name="SquishTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="timeout" from="SquishTimer" to="." method="_on_squish_timer_timeout"]

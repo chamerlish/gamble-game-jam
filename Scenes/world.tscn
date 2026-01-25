@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://drr7hq8vxf7td"]
+[gd_scene load_steps=14 format=4 uid="uid://drr7hq8vxf7td"]
 
 [ext_resource type="TileSet" uid="uid://56n7ritx5voh" path="res://test_tileset.tres" id="1_a02cp"]
 [ext_resource type="Texture2D" uid="uid://cwx446ejrntq5" path="res://test_tilesheet.png" id="2_fo5ed"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://lx7i37jmv8dj" path="res://Scenes/UI/night_sim_hud.tscn" id="5_fo5ed"]
 [ext_resource type="Script" uid="uid://cxwd6ervjdlqw" path="res://Scripts/hud.gd" id="5_k7acu"]
 [ext_resource type="Script" uid="uid://b1h0f1u4onopf" path="res://Scenes/UI/night_sim_hud.gd" id="6_5ukr8"]
-[ext_resource type="PackedScene" uid="uid://d2xmikhqsgk1r" path="res://Scenes/customer.tscn" id="8_k7acu"]
 [ext_resource type="Shader" uid="uid://f3sp32cviu0" path="res://Scenes/world.gdshader" id="10_0fj1v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o06y3"]
@@ -88,16 +87,6 @@ script = ExtResource("5_k7acu")
 
 [node name="NightSimHUD" parent="HUD" instance=ExtResource("5_fo5ed")]
 script = ExtResource("6_5ukr8")
-
-[node name="Customer" parent="." instance=ExtResource("8_k7acu")]
-
-[node name="Customer2" parent="." instance=ExtResource("8_k7acu")]
-
-[node name="Customer3" parent="." instance=ExtResource("8_k7acu")]
-
-[node name="Customer4" parent="." instance=ExtResource("8_k7acu")]
-
-[node name="Customer5" parent="." instance=ExtResource("8_k7acu")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1

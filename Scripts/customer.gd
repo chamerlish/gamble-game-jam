@@ -16,7 +16,11 @@ enum Class {
 	Rich
 }
 
+@export var jump_speed : float = 9
+@export var jump_height:= 20
+
 func _ready() -> void:
+	scale = Vector2(1.7, 0.4)
 	GlobalMachine.customer_list.append(self)
 
 var current_state: State
@@ -33,12 +37,21 @@ func _on_interraction_collider_body_entered(body: Node2D) -> void:
 		$PlayingTimer.start()
 		current_state = State.Playing
 
-func _physics_process(delta: float) -> void:
-	z_index = GlobalMachine.get_entity_z(self)
+var time: float
 
+func walk_around(time: float):
+	$Sprite2D.position.y = sin(time * jump_speed) * jump_height
+	
+func _physics_process(delta: float) -> void:
+	time += delta
+	
+	scale = lerp(scale, Vector2(1,1), 0.1)
+	
+	z_index = GlobalMachine.get_entity_z(self)
 	
 	match current_state:
 		State.Moving:
+			#walk_around(time)
 			var dir := (target_position - global_position).normalized()
 			velocity = dir * SPEED * delta
 		State.Playing:
@@ -50,7 +63,7 @@ func _physics_process(delta: float) -> void:
 func _on_wondering_moving_timer_timeout() -> void:
 	var rand_want_play = randi_range(1, 10)
 	if rand_want_play <= 8: # they want play
-		print("i wanna play")
+
 		if GlobalMachine.available_machine_list:
 			machine_in_use = get_random_machine()
 			
@@ -73,5 +86,5 @@ func _on_playing_timer_timeout() -> void:
 	
 	current_state = State.Wondering
 	machine_in_use.get_node("Sprite2D").modulate.r = 0.5
-	print("done playing")
+
 	$WonderingMovingTimer.start()

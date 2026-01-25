@@ -152,6 +152,7 @@ theme_override_font_sizes/normal_font_size = 30
 fit_content = true
 
 [node name="Panel" type="Panel" parent="HUD"]
+visible = false
 layout_mode = 0
 offset_left = -101.0
 offset_top = -50.0
