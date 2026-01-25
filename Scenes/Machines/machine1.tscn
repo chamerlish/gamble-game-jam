@@ -9,7 +9,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HUD/MoneyLossText:modulate")
+tracks/0/path = NodePath("../HUD/MouseFollow/MoneyLossText:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -21,7 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HUD/MoneyLossText:position")
+tracks/1/path = NodePath("../HUD/MouseFollow/MoneyLossText:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -36,7 +36,7 @@ resource_name = "money_gain"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HUD/MoneyGainText:modulate")
+tracks/0/path = NodePath("../HUD/MouseFollow/MoneyGainText:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -48,7 +48,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HUD/MoneyGainText:position")
+tracks/1/path = NodePath("../HUD/MouseFollow/MoneyGainText:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -63,7 +63,7 @@ resource_name = "money_loss"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HUD/MoneyLossText:modulate")
+tracks/0/path = NodePath("../HUD/MouseFollow/MoneyLossText:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -75,7 +75,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HUD/MoneyLossText:position")
+tracks/1/path = NodePath("../HUD/MouseFollow/MoneyLossText:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -100,11 +100,6 @@ size = Vector2(301, 220.5)
 [node name="Machine" type="StaticBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_h612m")
-placed = null
-machine_name = null
-odds_of_winning = null
-prize_money = null
-price = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_xuuum")
@@ -114,6 +109,7 @@ y_sort_enabled = true
 polygon = PackedVector2Array(55, 32, 0, 1, -55, 32, 0, 63)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CollisionPolygon2D")
 libraries = {
 &"": SubResource("AnimationLibrary_8nuxq")
 }
@@ -124,18 +120,25 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="MoneyGainText" type="RichTextLabel" parent="HUD"]
+[node name="MouseFollow" type="Control" parent="HUD"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MoneyGainText" type="RichTextLabel" parent="HUD/MouseFollow"]
 modulate = Color(1, 1, 1, 0)
 z_index = 100
 layout_mode = 0
-offset_right = 114.0
-offset_bottom = 78.0
+offset_right = 142.0
+offset_bottom = 90.0
 theme = ExtResource("3_txefx")
 theme_override_colors/default_color = Color(0, 0.7251751, 5.7756904e-07, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1
+theme_override_font_sizes/normal_font_size = 30
+fit_content = true
 
-[node name="MoneyLossText" type="RichTextLabel" parent="HUD"]
+[node name="MoneyLossText" type="RichTextLabel" parent="HUD/MouseFollow"]
 z_index = 100
 layout_mode = 0
 offset_top = 30.0
@@ -144,7 +147,9 @@ offset_bottom = 108.0
 theme = ExtResource("3_txefx")
 theme_override_colors/default_color = Color(0.8288101, 2.7193873e-06, 5.7756904e-07, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 1
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 30
+fit_content = true
 
 [node name="Panel" type="Panel" parent="HUD"]
 layout_mode = 0
@@ -198,6 +203,5 @@ z_index = 4096
 position = Vector2(-0.5, -1.25)
 shape = SubResource("RectangleShape2D_txefx")
 
-[connection signal="drag_ended" from="HUD/Panel/Slider" to="." method="_on_slider_drag_ended"]
 [connection signal="mouse_entered" from="MouseTweakArea" to="." method="_on_mouse_tweak_area_mouse_entered"]
 [connection signal="mouse_exited" from="MouseTweakArea" to="." method="_on_mouse_tweak_area_mouse_exited"]

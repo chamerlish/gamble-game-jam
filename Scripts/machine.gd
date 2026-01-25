@@ -80,16 +80,16 @@ func place_machine():
 	loose_money(price)
 
 
-@onready var money_loss_label = $HUD/MoneyLossText
-@onready var money_gain_label = $HUD/MoneyGainText
+@onready var money_loss_label = $HUD/MouseFollow/MoneyLossText
+@onready var money_gain_label = $HUD/MouseFollow/MoneyGainText
 
 func loose_money(amount: int):
-	money_loss_label.position.x = get_global_mouse_position().x
+	$HUD/MouseFollow.global_position = get_global_mouse_position()
 	money_loss_label.text = "- " + str(amount) + " $"
 	$AnimationPlayer.play("money_loss")
 
 func win_money(amount: float):
-	money_gain_label.position.x = get_global_mouse_position().x
+	$HUD/MouseFollow.global_position = get_global_mouse_position()
 	money_gain_label.text = "+ " + str(amount) + " $"
 	$AnimationPlayer.play("money_gain")
 

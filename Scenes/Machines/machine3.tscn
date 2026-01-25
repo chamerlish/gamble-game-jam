@@ -9,7 +9,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HUD/MoneyLossText:modulate")
+tracks/0/path = NodePath("../HUD/MouseFollow/MoneyLossText:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -21,7 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HUD/MoneyLossText:position")
+tracks/1/path = NodePath("../HUD/MouseFollow/MoneyLossText:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -36,7 +36,7 @@ resource_name = "money_gain"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HUD/MoneyGainText:modulate")
+tracks/0/path = NodePath("../HUD/MouseFollow/MoneyGainText:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -48,7 +48,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HUD/MoneyGainText:position")
+tracks/1/path = NodePath("../HUD/MouseFollow/MoneyGainText:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -63,7 +63,7 @@ resource_name = "money_loss"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HUD/MoneyLossText:modulate")
+tracks/0/path = NodePath("../HUD/MouseFollow/MoneyLossText:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -75,7 +75,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HUD/MoneyLossText:position")
+tracks/1/path = NodePath("../HUD/MouseFollow/MoneyLossText:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -109,6 +109,7 @@ y_sort_enabled = true
 polygon = PackedVector2Array(55, 32, 0, 1, -55, 32, 0, 63)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CollisionPolygon2D")
 libraries = {
 &"": SubResource("AnimationLibrary_8nuxq")
 }
@@ -119,7 +120,12 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="MoneyGainText" type="RichTextLabel" parent="HUD"]
+[node name="MouseFollow" type="Control" parent="HUD"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MoneyGainText" type="RichTextLabel" parent="HUD/MouseFollow"]
 modulate = Color(1, 1, 1, 0)
 z_index = 100
 layout_mode = 0
@@ -128,9 +134,10 @@ offset_bottom = 78.0
 theme = ExtResource("3_j5ob7")
 theme_override_colors/default_color = Color(0, 0.7251751, 5.7756904e-07, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 1
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 30
 
-[node name="MoneyLossText" type="RichTextLabel" parent="HUD"]
+[node name="MoneyLossText" type="RichTextLabel" parent="HUD/MouseFollow"]
 z_index = 100
 layout_mode = 0
 offset_top = 30.0
@@ -139,14 +146,15 @@ offset_bottom = 108.0
 theme = ExtResource("3_j5ob7")
 theme_override_colors/default_color = Color(0.8288101, 2.7193873e-06, 5.7756904e-07, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 1
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 30
 
 [node name="Panel" type="Panel" parent="HUD"]
 layout_mode = 0
 offset_left = -101.0
-offset_top = -53.0
+offset_top = -50.0
 offset_right = 104.0
-offset_bottom = 44.0
+offset_bottom = 47.0
 theme = ExtResource("3_j5ob7")
 
 [node name="ProgressBar" type="ProgressBar" parent="HUD/Panel"]
