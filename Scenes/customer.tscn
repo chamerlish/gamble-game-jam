@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2xmikhqsgk1r"]
+[gd_scene format=3 uid="uid://d2xmikhqsgk1r"]
 
 [ext_resource type="Script" uid="uid://bpucnc4dxkm3l" path="res://Scripts/customer.gd" id="1_7c3kf"]
 [ext_resource type="Texture2D" uid="uid://ybaotrw1tyf6" path="res://Resources/Sprites/Customers/sprite.png" id="2_7c3kf"]
@@ -8,26 +8,26 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_7c3kf"]
 radius = 48.166378
 
-[node name="Customer" type="CharacterBody2D"]
+[node name="Customer" type="CharacterBody2D" unique_id=1908784811]
 script = ExtResource("1_7c3kf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=697294723]
 shape = SubResource("RectangleShape2D_au6nw")
 disabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1862287666]
 texture = ExtResource("2_7c3kf")
 
-[node name="WonderingMovingTimer" type="Timer" parent="."]
+[node name="WonderingMovingTimer" type="Timer" parent="." unique_id=282613173]
 wait_time = 2.0
 autostart = true
 
-[node name="PlayingTimer" type="Timer" parent="."]
+[node name="PlayingTimer" type="Timer" parent="." unique_id=1909702758]
 one_shot = true
 
-[node name="InterractionCollider" type="Area2D" parent="."]
+[node name="InterractionCollider" type="Area2D" parent="." unique_id=406919349]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InterractionCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InterractionCollider" unique_id=92711805]
 shape = SubResource("CircleShape2D_7c3kf")
 
 [connection signal="timeout" from="WonderingMovingTimer" to="." method="_on_wondering_moving_timer_timeout"]

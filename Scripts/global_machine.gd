@@ -8,7 +8,7 @@ var machine_list: Array[PackedScene] = [
 	preload("res://Scenes/Machines/machine3.tscn")
 ]
 
-
+var customer_scene: PackedScene = preload("res://Scenes/customer.tscn")
 
 var entity_list: Array[Node2D]
 
