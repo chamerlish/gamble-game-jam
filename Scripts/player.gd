@@ -7,9 +7,11 @@ const BOUNCE_MULTIPLIER := 1  # How much of the velocity to bounce back (0.5 = 5
 var selected_machine: Machine
 var post_transition_can_show: bool
 
+
 var can_squish: bool = true
 
-@export var min_vel_y_stun: int = 70
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 
 func _ready() -> void:
 	Global.player_node = self
@@ -20,11 +22,63 @@ func switch_player_state():
 	if Global.night:
 		night_mode()
 	else:
-		$Sprite2D.show()
+		sprite.show()
 	
 	clear_selected_machine()
 	
 
+func animate(direction: Vector2) -> void:
+	var play_speed: float 
+	if direction.length() > 0:
+		play_speed = max(0.5, velocity.length() / SPEED)
+		if direction.length() == 1: # meaning the player is only going one way
+			if abs(direction.x) > abs(direction.y): # that means that x is changing
+				if direction.x > 0: # pressing right
+					sprite.play("side_down", play_speed)
+					sprite.flip_h = true
+				elif direction.x < 0: # pressing left
+					sprite.play("side_up", play_speed)
+					sprite.flip_h = false
+			else: # that means that the y is changing but not the x
+				if direction.y > 0: # pressing up
+					sprite.play("side_down", play_speed)
+					sprite.flip_h = false
+				elif direction.y < 0: # pressing down
+					sprite.play("side_up", play_speed)
+					sprite.flip_h = true
+		elif direction.length() > 1: # meaning the player is going diagnal:
+			if (velocity.x < 20 or velocity.y < 20):
+				if abs(velocity.x) > abs(velocity.y):
+					sprite.play("side", play_speed)
+					if velocity.x > 0:
+						sprite.flip_h = true
+					else: 
+						sprite.flip_h = false
+				elif abs(velocity.x) < abs(velocity.y):
+					if velocity.y > 0:
+						sprite.play("down", play_speed)
+					else:
+						sprite.play("up", play_speed)
+			elif abs(velocity.x) > abs(velocity.y):
+				if direction.x > 0: # pressing right
+					sprite.play("side_down", play_speed)
+					sprite.flip_h = true
+				elif direction.x < 0: # pressing left
+					sprite.play("side_up", play_speed)
+					sprite.flip_h = false
+			elif abs(velocity.x) < abs(velocity.y):
+				if direction.y > 0: # pressing up
+					sprite.play("side_down", play_speed)
+					sprite.flip_h = false
+				elif direction.y < 0: # pressing down
+					sprite.play("side_up", play_speed)
+					sprite.flip_h = true
+	else:
+		play_speed = lerp(play_speed, 0.0, 0.01)
+		if velocity.length() < 10:
+			sprite.stop()
+			sprite.frame = 3
+			
 var squish_timer: float = 2
 func _physics_process(delta: float) -> void:
 	z_index = GlobalMachine.get_entity_z(self)
@@ -36,6 +90,8 @@ func _physics_process(delta: float) -> void:
 		Input.get_axis("move_left", "move_right"),
 		Input.get_axis("move_up", "move_down")
 	)
+	animate(input_dir)
+	
 	
 	input_dir = Global.cartesian_to_isometric(input_dir)
 	
@@ -68,7 +124,7 @@ func _physics_process(delta: float) -> void:
 	scale = lerp(scale, Vector2(1,1), 0.2)
 
 func night_mode():
-	$Sprite2D.hide()
+	sprite.hide()
 
 func pick_machine(id: int):
 	clear_selected_machine()
