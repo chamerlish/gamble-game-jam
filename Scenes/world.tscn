@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://b1h0f1u4onopf" path="res://Scenes/UI/night_sim_hud.gd" id="6_5ukr8"]
 [ext_resource type="Shader" uid="uid://f3sp32cviu0" path="res://Scenes/world.gdshader" id="10_0fj1v"]
 [ext_resource type="PackedScene" uid="uid://d2xmikhqsgk1r" path="res://Scenes/customer.tscn" id="10_ikia7"]
+[ext_resource type="PackedScene" uid="uid://cgu38iml7a5lr" path="res://Scenes/door.tscn" id="11_ikia7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o06y3"]
 texture = ExtResource("2_fo5ed")
@@ -102,3 +103,6 @@ grow_vertical = 2
 
 [node name="Customer" parent="." unique_id=1908784811 instance=ExtResource("10_ikia7")]
 position = Vector2(165, 128)
+
+[node name="Door" parent="." unique_id=1932543553 instance=ExtResource("11_ikia7")]
+position = Vector2(-385, -128)

@@ -32,8 +32,7 @@ func transition(delta):
 	else:
 		mat.set_shader_parameter("height", lerp(1.0, -1.0, progress))
 		mat.set_shader_parameter("pixel_size", lerp(0.01, 0.2, progress))
-		
-		size.x 
+
 		scale.y = -1
 		
 		if progress >= 1.0:

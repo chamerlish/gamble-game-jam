@@ -19,14 +19,14 @@ run/main_scene="uid://drr7hq8vxf7td"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://cpcfpqgisyh7c"
+
 [autoload]
 
 Global="*res://Scripts/global.gd"
 GlobalMachine="*res://Scripts/global_machine.gd"
-
-[display]
-
-window/stretch/mode="viewport"
 
 [input]
 

@@ -1,22 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgu38iml7a5lr"]
+[gd_scene format=3 uid="uid://cgu38iml7a5lr"]
 
 [ext_resource type="Script" uid="uid://bwicfcuig0pv" path="res://Scripts/door.gd" id="1_p0e35"]
 [ext_resource type="Texture2D" uid="uid://ctk3y43oc48t4" path="res://Resources/Sprites/Rarities/door.png" id="1_w6aom"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0e35"]
-size = Vector2(220, 384)
+size = Vector2(220, 64)
 
-[node name="Door" type="StaticBody2D"]
+[node name="Door" type="StaticBody2D" unique_id=501344013]
 script = ExtResource("1_p0e35")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1020594791]
 texture = ExtResource("1_w6aom")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=411372957]
+position = Vector2(0, 160)
 shape = SubResource("RectangleShape2D_p0e35")
 
-[node name="SpawnDelay" type="Timer" parent="."]
-wait_time = 10.0
+[node name="WaveDelay" type="Timer" parent="." unique_id=1606209738]
+wait_time = 30.0
 autostart = true
 
-[connection signal="timeout" from="SpawnDelay" to="." method="_on_spawn_delay_timeout"]
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1844637678]
+
+[connection signal="timeout" from="WaveDelay" to="." method="_on_wave_delay_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

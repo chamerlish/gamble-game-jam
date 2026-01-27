@@ -2,10 +2,10 @@
 shader_type canvas_item;
 
 uniform float AspectRatio = 1.5;
-uniform float Diamonds = 10.0;
+uniform float Diamonds = 4.0;
 const float _min = -1.0;
 const float _max = 1.0;
-uniform float pixel_size = 0.08;
+uniform float pixel_size = 0.8;
 
 uniform float height = -1.0;
 uniform bool disable_pixel;

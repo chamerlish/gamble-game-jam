@@ -192,6 +192,5 @@ one_shot = true
 
 [node name="BounceSFX" type="AudioStreamPlayer" parent="." unique_id=1794648575]
 stream = ExtResource("4_vgqql")
-bus = &"SFX"
 
 [connection signal="timeout" from="SquishTimer" to="." method="_on_squish_timer_timeout"]

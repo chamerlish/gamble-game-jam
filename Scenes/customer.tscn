@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d2xmikhqsgk1r"]
 
 [ext_resource type="Script" uid="uid://bpucnc4dxkm3l" path="res://Scripts/customer.gd" id="1_7c3kf"]
-[ext_resource type="Texture2D" uid="uid://ybaotrw1tyf6" path="res://Resources/Sprites/Customers/sprite.png" id="2_7c3kf"]
+[ext_resource type="Texture2D" uid="uid://1uy20thi4tbm" path="res://Resources/Sprites/Customers/sprite_sheet.png" id="2_7c3kf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_au6nw"]
 
@@ -16,7 +16,9 @@ shape = SubResource("RectangleShape2D_au6nw")
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1862287666]
+texture_filter = 1
 texture = ExtResource("2_7c3kf")
+hframes = 4
 
 [node name="WonderingMovingTimer" type="Timer" parent="." unique_id=282613173]
 wait_time = 2.0

@@ -11,6 +11,8 @@ enum State {
 @export var jump_speed : float = 9
 @export var jump_height := 20
 
+@onready var sprite: Sprite2D = $Sprite2D
+
 var current_state: State = State.Wondering
 var machine_in_use: Machine
 
@@ -21,6 +23,9 @@ var time := 0.0
 var dir := Vector2.ZERO
 
 func _ready() -> void:
+	# pick one random texture
+	sprite.frame = randi_range(0, 4)
+	
 	scale = Vector2(1.7, 0.4)
 	GlobalMachine.customer_list.append(self)
 
@@ -59,15 +64,16 @@ func _on_wondering_moving_timer_timeout() -> void:
 				current_state = State.Moving
 
 		State.Moving:
-			current_state = State.Wondering
+			if machine_in_use == null:
+				current_state = State.Wondering
 
 func wants_to_play() -> bool:
-	return randi_range(1, 10) <= 3
+	return randi_range(1, 10) <= 8
 
 func try_go_play() -> void:
 	if GlobalMachine.available_machine_list.is_empty():
 		return
-
+	
 	machine_in_use = get_random_machine()
 	machine_in_use.available = false
 	GlobalMachine.available_machine_list.erase(machine_in_use)
@@ -85,6 +91,19 @@ func _on_interraction_collider_body_entered(body: Node2D) -> void:
 		$PlayingTimer.start()
 
 func _on_playing_timer_timeout() -> void:
+	# Finished playing
+	
+	var chance_of_winning:= randf_range(0, 255)
+	if chance_of_winning == 255:
+		machine_in_use.loose_money(1000)
+	else:
+		machine_in_use.win_money(25)
+	
+	var chance_of_breaking:= randi_range(0, 10)
+	if chance_of_breaking > 8:
+		machine_in_use.break_machine()
+	
+	
 	machine_in_use.available = true
 	GlobalMachine.available_machine_list.append(machine_in_use)
 	machine_in_use.get_node("Sprite2D").modulate.r = 0.5

@@ -104,3 +104,9 @@ func _on_mouse_tweak_area_mouse_exited() -> void:
 
 func _on_slider_drag_ended(value_changed: bool) -> void:
 	odds_of_winning = panel_tweak.get_node("Slider").value / 100
+
+func break_machine():
+	broken = true
+	available = false
+	GlobalMachine.available_machine_list.erase(self)
+	modulate.b=1

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED := 1000.0
+const MAX_SPEED := 1000.0
 const ACCEL := 1200.0
 const BOUNCE_MULTIPLIER := 1  # How much of the velocity to bounce back (0.5 = 50%)
 
@@ -9,6 +9,8 @@ var post_transition_can_show: bool
 
 
 var can_squish: bool = true
+
+var speed: float
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -28,60 +30,63 @@ func switch_player_state():
 	
 
 func animate(direction: Vector2) -> void:
-	var play_speed: float 
+	var play_MAX_SPEED: float 
 	if direction.length() > 0:
-		play_speed = max(0.5, velocity.length() / SPEED)
+		play_MAX_SPEED = max(0.5, speed / MAX_SPEED)
 		if direction.length() == 1: # meaning the player is only going one way
 			if abs(direction.x) > abs(direction.y): # that means that x is changing
 				if direction.x > 0: # pressing right
-					sprite.play("side_down", play_speed)
+					sprite.play("side_down", play_MAX_SPEED)
 					sprite.flip_h = true
 				elif direction.x < 0: # pressing left
-					sprite.play("side_up", play_speed)
+					sprite.play("side_up", play_MAX_SPEED)
 					sprite.flip_h = false
 			else: # that means that the y is changing but not the x
 				if direction.y > 0: # pressing up
-					sprite.play("side_down", play_speed)
+					sprite.play("side_down", play_MAX_SPEED)
 					sprite.flip_h = false
 				elif direction.y < 0: # pressing down
-					sprite.play("side_up", play_speed)
+					sprite.play("side_up", play_MAX_SPEED)
 					sprite.flip_h = true
 		elif direction.length() > 1: # meaning the player is going diagnal:
 			if (velocity.x < 20 or velocity.y < 20):
 				if abs(velocity.x) > abs(velocity.y):
-					sprite.play("side", play_speed)
-					if velocity.x > 0:
-						sprite.flip_h = true
-					else: 
-						sprite.flip_h = false
+					if direction.x * direction.y < 0:
+						sprite.play("side", play_MAX_SPEED)
+						if velocity.x > 0:
+							sprite.flip_h = true
+						else: 
+							sprite.flip_h = false
 				elif abs(velocity.x) < abs(velocity.y):
 					if velocity.y > 0:
-						sprite.play("down", play_speed)
+						sprite.play("down", play_MAX_SPEED)
 					else:
-						sprite.play("up", play_speed)
-			elif abs(velocity.x) > abs(velocity.y):
+						sprite.play("up", play_MAX_SPEED)
+			elif abs(velocity.x) > 2 * abs(velocity.y):
 				if direction.x > 0: # pressing right
-					sprite.play("side_down", play_speed)
+					sprite.play("side_down", play_MAX_SPEED)
 					sprite.flip_h = true
 				elif direction.x < 0: # pressing left
-					sprite.play("side_up", play_speed)
+					sprite.play("side_up", play_MAX_SPEED)
 					sprite.flip_h = false
-			elif abs(velocity.x) < abs(velocity.y):
+			elif abs(velocity.x) < 2 * abs(velocity.y):
 				if direction.y > 0: # pressing up
-					sprite.play("side_down", play_speed)
+					sprite.play("side_down", play_MAX_SPEED)
 					sprite.flip_h = false
 				elif direction.y < 0: # pressing down
-					sprite.play("side_up", play_speed)
+					sprite.play("side_up", play_MAX_SPEED)
 					sprite.flip_h = true
 	else:
-		play_speed = lerp(play_speed, 0.0, 0.01)
-		if velocity.length() < 10:
+		play_MAX_SPEED = lerp(play_MAX_SPEED, 0.0, 0.01)
+		if speed < 10:
 			sprite.stop()
 			sprite.frame = 3
 			
 var squish_timer: float = 2
 func _physics_process(delta: float) -> void:
 	z_index = GlobalMachine.get_entity_z(self)
+	speed = velocity.length()
+	
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		Global.change_night_state()
@@ -97,7 +102,7 @@ func _physics_process(delta: float) -> void:
 	
 	if input_dir != Vector2.ZERO and not Global.night:
 		input_dir = input_dir.normalized()
-		var target_velocity = input_dir * SPEED
+		var target_velocity = input_dir * MAX_SPEED
 		velocity = velocity.move_toward(target_velocity, ACCEL * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, 2*ACCEL/3 * delta)
@@ -113,10 +118,14 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.bounce(collision.get_normal()) * BOUNCE_MULTIPLIER
 		$SquishTimer.stop()
 		
+		
 		# Squish only if the bounce actually changed velocity
-		if velocity.length() > 20:
+		if speed > 20:
 			$SquishTimer.start()
 			if can_squish:
+				if $BounceSFX.playing == false:
+					$BounceSFX.volume_db = min(-5, -48 + ((speed) / (MAX_SPEED)*48)) 
+					$BounceSFX.play()
 				scale = Vector2(1.7, 0.4)
 				can_squish = false
 			

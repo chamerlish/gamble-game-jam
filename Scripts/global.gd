@@ -11,6 +11,9 @@ signal begin_switch_night_state
 signal finish_switch_night_state
 signal mid_switch_night_state
 
+var difficulty: int = 1
+const MAX_DIFFICULTY: int = 8
+
 var camera_node: Camera2D
 
 var amount_money: float
