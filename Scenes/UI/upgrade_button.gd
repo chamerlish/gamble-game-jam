@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func _on_pressed() -> void:
 	if Global.amount_money > 0:
-		Global.wall_node.expend()
+		Global.expand.emit()
 		Global.loose_money(get_price())
 		level += 1
 		$PriceLabel.text = str(get_price()) + "$"

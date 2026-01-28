@@ -11,7 +11,7 @@ signal begin_switch_night_state
 signal finish_switch_night_state
 signal mid_switch_night_state
 
-var wall_node: Node2D
+signal expand
 
 var difficulty: int = 1
 const MAX_DIFFICULTY: int = 8
