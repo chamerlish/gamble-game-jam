@@ -23,6 +23,9 @@ func change_selected_machine(machine_id: int):
 func get_machine_icon(machine_id: int) -> Texture2D:
 	return GlobalMachine.machine_list[machine_id].instantiate().get_node("Sprite2D").texture
 
+func get_machine_price(machine_id: int) -> int:
+	return GlobalMachine.machine_list[machine_id].instantiate().price
+
 
 func get_entity_z(entity: Node2D) -> int:
 	var temp_entity_list = []

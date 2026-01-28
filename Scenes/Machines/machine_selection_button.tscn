@@ -1,16 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnb3o1vl7dq6r"]
+[gd_scene format=3 uid="uid://bnb3o1vl7dq6r"]
 
 [ext_resource type="Script" uid="uid://csejebpvy41nk" path="res://Scripts/machine_selection_button.gd" id="1_0mkwh"]
+[ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="2_fmvsi"]
 
 [sub_resource type="Theme" id="Theme_0mkwh"]
 
-[node name="MachineSelectionButton" type="Button"]
+[node name="MachineSelectionButton" type="Button" unique_id=639037972]
 offset_right = 54.0
 offset_bottom = 70.0
 script = ExtResource("1_0mkwh")
 machine_id = 1
 
-[node name="Sprite2D" type="TextureRect" parent="."]
+[node name="Sprite2D" type="TextureRect" parent="." unique_id=229849838]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -19,5 +20,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_0mkwh")
+
+[node name="PriceLabel" type="RichTextLabel" parent="." unique_id=1126483262]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -53.0
+offset_top = -17.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("2_fmvsi")
+theme_override_constants/shadow_outline_size = 10
+theme_override_constants/outline_size = 10
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]

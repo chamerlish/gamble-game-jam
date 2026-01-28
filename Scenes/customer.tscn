@@ -33,6 +33,8 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InterractionCollider" unique_id=92711805]
 shape = SubResource("CircleShape2D_7c3kf")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=266238740]
+
 [connection signal="timeout" from="WonderingMovingTimer" to="." method="_on_wondering_moving_timer_timeout"]
 [connection signal="timeout" from="PlayingTimer" to="." method="_on_playing_timer_timeout"]
 [connection signal="body_entered" from="InterractionCollider" to="." method="_on_interraction_collider_body_entered"]

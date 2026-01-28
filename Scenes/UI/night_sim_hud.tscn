@@ -1,25 +1,70 @@
-[gd_scene load_steps=2 format=3 uid="uid://lx7i37jmv8dj"]
+[gd_scene format=3 uid="uid://lx7i37jmv8dj"]
 
 [ext_resource type="PackedScene" uid="uid://bnb3o1vl7dq6r" path="res://Scenes/Machines/machine_selection_button.tscn" id="1_0vmel"]
+[ext_resource type="Texture2D" uid="uid://7hmk1agh6my2" path="res://icon.svg" id="2_tbp50"]
+[ext_resource type="Script" uid="uid://04xk0h152j75" path="res://Scenes/UI/upgrade_button.gd" id="3_hu0pb"]
+[ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="4_ym3bv"]
 
-[node name="NightSimHUD" type="Control"]
+[node name="NightSimHUD" type="Control" unique_id=1582504801]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0.5, 0.5)
+pivot_offset_ratio = Vector2(0.5, 0)
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MachinePlace" type="HBoxContainer" parent="." unique_id=1171008364]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 50.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = -50.0
 
-[node name="MachineSelectionButton" parent="HBoxContainer" instance=ExtResource("1_0vmel")]
+[node name="MachineSelectionButton" parent="MachinePlace" unique_id=1529520326 instance=ExtResource("1_0vmel")]
 layout_mode = 2
 machine_id = 0
 
-[node name="MachineSelectionButton2" parent="HBoxContainer" instance=ExtResource("1_0vmel")]
+[node name="MachineSelectionButton2" parent="MachinePlace" unique_id=1514242693 instance=ExtResource("1_0vmel")]
 layout_mode = 2
 
-[node name="MachineSelectionButton3" parent="HBoxContainer" instance=ExtResource("1_0vmel")]
+[node name="MachineSelectionButton3" parent="MachinePlace" unique_id=1605467303 instance=ExtResource("1_0vmel")]
 layout_mode = 2
 machine_id = 2
+
+[node name="CasinoUpgrade" type="VBoxContainer" parent="." unique_id=1154626568]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 0
+
+[node name="UpgradeButton" type="TextureButton" parent="CasinoUpgrade" unique_id=935761237]
+layout_mode = 2
+texture_normal = ExtResource("2_tbp50")
+script = ExtResource("3_hu0pb")
+
+[node name="PriceLabel" type="RichTextLabel" parent="CasinoUpgrade/UpgradeButton" unique_id=960785869]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -53.0
+offset_top = -17.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("4_ym3bv")
+theme_override_constants/shadow_outline_size = 10
+theme_override_constants/outline_size = 10
+
+[connection signal="pressed" from="CasinoUpgrade/UpgradeButton" to="CasinoUpgrade/UpgradeButton" method="_on_pressed"]

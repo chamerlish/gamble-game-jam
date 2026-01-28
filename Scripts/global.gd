@@ -11,6 +11,8 @@ signal begin_switch_night_state
 signal finish_switch_night_state
 signal mid_switch_night_state
 
+var wall_node: Node2D
+
 var difficulty: int = 1
 const MAX_DIFFICULTY: int = 8
 
@@ -33,4 +35,5 @@ func change_night_state():
 	night = not Global.night
 	begin_switch_night_state.emit()
 
-	
+func loose_money(amount: int) -> void:
+	amount_money -= amount

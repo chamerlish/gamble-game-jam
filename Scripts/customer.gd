@@ -8,6 +8,12 @@ enum State {
 	Playing
 }
 
+const play_sounds := [
+	"res://Resources/SFX/Machines/customer1.wav", 
+	"res://Resources/SFX/Machines/customer2.wav",
+	"res://Resources/SFX/Machines/customer3.wav",]
+
+
 @export var jump_speed : float = 9
 @export var jump_height := 20
 
@@ -93,6 +99,8 @@ func _on_interraction_collider_body_entered(body: Node2D) -> void:
 	if body == machine_in_use:
 		current_state = State.Playing
 		machine_in_use.play_sfx()
+		$AudioStreamPlayer2D.stream = load(play_sounds[randi_range(0, 2)])
+		$AudioStreamPlayer2D.play()
 		$PlayingTimer.start()
 
 func _on_playing_timer_timeout() -> void:
