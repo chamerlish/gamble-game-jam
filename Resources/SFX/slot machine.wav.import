@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ck602sw7q0c7e"
+path="res://.godot/imported/slot machine.wav-d37bf2b23fcd640711e1e86fcd7420d2.sample"
+
+[deps]
+
+source_file="res://Resources/SFX/slot machine.wav"
+dest_files=["res://.godot/imported/slot machine.wav-d37bf2b23fcd640711e1e86fcd7420d2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

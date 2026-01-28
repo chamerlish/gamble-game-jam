@@ -17,6 +17,8 @@ class_name Machine
 @export var prize_money: int = 100
 @export var price: int = 100
 
+@onready var roll_sfx: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 # for the panel cuz when you drop it first it counts as drop
 var nums_of_clicks: int 
 
@@ -96,16 +98,16 @@ func win_money(amount: float):
 	$AnimationPlayer.play("money_gain")
 
 
-func _on_mouse_tweak_area_mouse_entered() -> void:
-	mouse_inside = true
+#func _on_mouse_tweak_area_mouse_entered() -> void:
+#	mouse_inside = true
 
 
-func _on_mouse_tweak_area_mouse_exited() -> void:
-	mouse_inside = false
+#func _on_mouse_tweak_area_mouse_exited() -> void:
+#	mouse_inside = false
 
 
-func _on_slider_drag_ended(value_changed: bool) -> void:
-	odds_of_winning = panel_tweak.get_node("Slider").value / 100
+#func _on_slider_drag_ended(value_changed: bool) -> void:
+#	odds_of_winning = panel_tweak.get_node("Slider").value / 100
 
 func break_machine():
 	broken = true
@@ -113,3 +115,7 @@ func break_machine():
 	GlobalMachine.available_machine_list.erase(self)
 	modulate.b=1
 	print("broookennn")
+	
+func play_sfx():
+	if roll_sfx:
+		roll_sfx.play()

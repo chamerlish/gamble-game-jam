@@ -194,4 +194,6 @@ one_shot = true
 stream = ExtResource("4_vgqql")
 bus = &"SFX"
 
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1617571682]
+
 [connection signal="timeout" from="SquishTimer" to="." method="_on_squish_timer_timeout"]

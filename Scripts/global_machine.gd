@@ -25,18 +25,22 @@ func get_machine_icon(machine_id: int) -> Texture2D:
 
 
 func get_entity_z(entity: Node2D) -> int:
-	entity_list = []
+	var temp_entity_list = []
 	for machine in placed_machine_list:
 		if machine: # if they might get deleted midway CMON IK THIS IS MESSY BUT WHATEVER
-			entity_list.append(machine)
+			temp_entity_list.append(machine)
 		
 	for customer in customer_list:
 		if customer:
-			entity_list.append(customer)
+			temp_entity_list.append(customer)
 	
-	entity_list.append(Global.player_node)
+	for other_intity in entity_list:
+		if other_intity:
+			temp_entity_list.append(entity)
 	
-	sort_y_placed_machine(entity_list)
+	temp_entity_list.append(Global.player_node)
+	
+	sort_y_placed_machine(temp_entity_list)
 	
 #	if machine.position.y < Global.player_node.position.y:
 #		var i = placed_machine_list.size() - 1
@@ -45,7 +49,7 @@ func get_entity_z(entity: Node2D) -> int:
 #			placed_machine_list[i].z_index = 
 #			i -= 1
 		
-	return entity_list.find(entity)
+	return temp_entity_list.find(entity)
 
 
 # biggest to smallest

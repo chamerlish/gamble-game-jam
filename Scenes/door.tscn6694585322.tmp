@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bwicfcuig0pv" path="res://Scripts/door.gd" id="1_p0e35"]
 [ext_resource type="Texture2D" uid="uid://ctk3y43oc48t4" path="res://Resources/Sprites/Rarities/door.png" id="1_w6aom"]
-[ext_resource type="AudioStream" uid="uid://dbl6a3cgdpubq" path="res://Resources/SFX/bell_ding.wav" id="3_fahql"]
 
 [node name="Door" type="StaticBody2D" unique_id=501344013]
 scale = Vector2(2, 2)
@@ -23,11 +22,6 @@ y_sort_enabled = true
 position = Vector2(-3, 17.499998)
 scale = Vector2(0.48863634, 0.6955645)
 polygon = PackedVector2Array(96.18605, 11.153622, 96.18605, -10.411593, -86.77208, 49.252167, -86.77208, 85.1942)
-
-[node name="Bell" type="AudioStreamPlayer" parent="." unique_id=422751096]
-stream = ExtResource("3_fahql")
-volume_db = -7.0
-bus = &"SFX"
 
 [connection signal="timeout" from="WaveDelay" to="." method="_on_wave_delay_timeout"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

@@ -8,12 +8,20 @@ func _ready() -> void:
 	
 	next_wave = generate_next_wave()
 	
+
+	
 	spawn_customer(next_wave)
 
+func _process(delta: float) -> void:
+	z_index = -1 
+
 func spawn_customer(nums_cus: int) -> void:
+	#$Bell.play()
 	for i in nums_cus:
 		#if can_spawn:
-		get_tree().get_root().add_child(GlobalMachine.customer_scene.instantiate())
+		var customer := GlobalMachine.customer_scene.instantiate()
+		get_tree().get_root().add_child(customer)
+		customer.global_position = global_position
 		await get_tree().create_timer(1/ float(Global.difficulty)).timeout
 
 func generate_next_wave() -> int:

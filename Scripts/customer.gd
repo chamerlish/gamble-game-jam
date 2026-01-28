@@ -35,6 +35,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	time += delta
+
 	scale = lerp(scale, Vector2.ONE, 0.1)
 	z_index = GlobalMachine.get_entity_z(self)
 
@@ -79,7 +80,6 @@ func try_go_play() -> void:
 	if machine_in_use.available:
 		machine_in_use.available = false
 		GlobalMachine.available_machine_list.erase(machine_in_use)
-
 		machine_in_use.get_node("Sprite2D").modulate.r = 10
 
 		target_position = machine_in_use.global_position
@@ -92,6 +92,7 @@ func try_go_play() -> void:
 func _on_interraction_collider_body_entered(body: Node2D) -> void:
 	if body == machine_in_use:
 		current_state = State.Playing
+		machine_in_use.play_sfx()
 		$PlayingTimer.start()
 
 func _on_playing_timer_timeout() -> void:

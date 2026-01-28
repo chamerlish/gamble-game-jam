@@ -25,6 +25,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="PlayingTimer" type="Timer" parent="." unique_id=1909702758]
+wait_time = 3.0
 one_shot = true
 
 [node name="InterractionCollider" type="Area2D" parent="." unique_id=406919349]
