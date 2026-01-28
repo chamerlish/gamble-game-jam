@@ -20,16 +20,17 @@ var target_direction: Vector2
 var target_position: Vector2
 
 var time := 0.0
-var dir := Vector2.ZERO
 
 func _ready() -> void:
 	# pick one random texture
-	sprite.frame = randi_range(0, 4)
+	sprite.frame = randi_range(0, 3)
 	
 	scale = Vector2(1.7, 0.4)
 	GlobalMachine.customer_list.append(self)
 
 	target_direction = get_random_direction()
+	target_direction.y = abs(target_direction.y)
+	current_state = State.Moving
 	$WonderingMovingTimer.start()
 
 func _physics_process(delta: float) -> void:

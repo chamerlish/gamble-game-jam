@@ -13,10 +13,11 @@ func spawn_customer(nums_cus: int) -> void:
 		#if can_spawn:
 		get_tree().get_root().add_child(GlobalMachine.customer_scene.instantiate())
 		await get_tree().create_timer(1/ float(Global.difficulty)).timeout
-		if randi() % 2 == 0 and Global.difficulty < Global.MAX_DIFFICULTY: Global.difficulty += 1 
+		print(Global.difficulty) 
 
 func _on_wave_delay_timeout() -> void:
 	spawn_customer(randi_range(3, 7))
+	if randi_range(0, 10) < 8 and Global.difficulty < Global.MAX_DIFFICULTY: Global.difficulty += 1
 
 
 func _on_spawn_timer_timeout() -> void:
