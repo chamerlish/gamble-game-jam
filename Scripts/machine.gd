@@ -26,7 +26,7 @@ var isDraggin: bool
 var available = true
 var mouse_inside := false
 
-var broken 
+var broken = false
 
 
 
@@ -38,6 +38,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	#print("available", available)
+	#print("broken:", broken)
 	if mouse_inside:
 		nums_of_clicks += 1
 		if Input.is_action_just_pressed("click") and nums_of_clicks > 0:
@@ -110,3 +112,4 @@ func break_machine():
 	available = false
 	GlobalMachine.available_machine_list.erase(self)
 	modulate.b=1
+	print("broookennn")

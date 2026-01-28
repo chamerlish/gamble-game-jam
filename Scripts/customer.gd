@@ -76,15 +76,18 @@ func try_go_play() -> void:
 		return
 	
 	machine_in_use = get_random_machine()
-	machine_in_use.available = false
-	GlobalMachine.available_machine_list.erase(machine_in_use)
+	if machine_in_use.available:
+		machine_in_use.available = false
+		GlobalMachine.available_machine_list.erase(machine_in_use)
 
-	machine_in_use.get_node("Sprite2D").modulate.r = 10
+		machine_in_use.get_node("Sprite2D").modulate.r = 10
 
-	target_position = machine_in_use.global_position
-	target_direction = (target_position - global_position).normalized()
+		target_position = machine_in_use.global_position
+		target_direction = (target_position - global_position).normalized()
 
-	current_state = State.Moving
+		current_state = State.Moving
+	else:
+		return
 
 func _on_interraction_collider_body_entered(body: Node2D) -> void:
 	if body == machine_in_use:
@@ -104,10 +107,11 @@ func _on_playing_timer_timeout() -> void:
 	if chance_of_breaking > 8:
 		machine_in_use.break_machine()
 	
-	
-	machine_in_use.available = true
-	GlobalMachine.available_machine_list.append(machine_in_use)
-	machine_in_use.get_node("Sprite2D").modulate.r = 0.5
+	if machine_in_use.broken != true:
+		machine_in_use.available = true
+		print(machine_in_use.available)
+		GlobalMachine.available_machine_list.append(machine_in_use)
+		machine_in_use.get_node("Sprite2D").modulate.r = 0.5
 
 	machine_in_use = null
 	current_state = State.Wondering
