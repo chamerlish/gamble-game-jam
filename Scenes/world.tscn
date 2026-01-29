@@ -89,6 +89,8 @@ script = ExtResource("11_7yui6")
 
 [node name="TOP" type="StaticBody2D" parent="Walls" unique_id=1235188867]
 position = Vector2(-554, -373)
+collision_layer = 3
+collision_mask = 3
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/TOP" unique_id=97227095]
@@ -96,6 +98,8 @@ polygon = PackedVector2Array(-511, 342, 609, -297, 552, -357, -594, 282)
 
 [node name="RIGHT" type="StaticBody2D" parent="Walls" unique_id=742304226]
 position = Vector2(626, -381)
+collision_layer = 3
+collision_mask = 3
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/RIGHT" unique_id=1382977775]
@@ -103,6 +107,8 @@ polygon = PackedVector2Array(-571, -290, 496, 320, 558, 278, -547, -341)
 
 [node name="LEFT" type="StaticBody2D" parent="Walls" unique_id=1936806467]
 position = Vector2(-520, 311)
+collision_layer = 3
+collision_mask = 3
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/LEFT" unique_id=206394693]
@@ -110,6 +116,8 @@ polygon = PackedVector2Array(-571, -290, 496, 320, 524, 270, -547, -341)
 
 [node name="BOTTOM" type="StaticBody2D" parent="Walls" unique_id=100133353]
 position = Vector2(569, 296)
+collision_layer = 3
+collision_mask = 3
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/BOTTOM" unique_id=1656554378]

@@ -18,8 +18,7 @@ func expand():
 
 
 func draw_terrain():
-	for cell_x in range(max_size.x, min_size.x):
-		for cell_y in range(max_size.y, min_size.y):
+	for cell_x in range(max_size.x, min_size.x + 1):
+		for cell_y in range(max_size.y, min_size.y + 1):
 			var cell = Vector2i(cell_x, cell_y)
-			print(cell)
 			tileset.set_cell(cell, 0, Vector2i(1, 0))

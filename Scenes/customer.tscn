@@ -4,21 +4,24 @@
 [ext_resource type="Texture2D" uid="uid://1uy20thi4tbm" path="res://Resources/Sprites/Customers/sprite_sheet.png" id="2_7c3kf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_au6nw"]
+size = Vector2(39, 19)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7c3kf"]
 radius = 48.166378
 
 [node name="Customer" type="CharacterBody2D" unique_id=1908784811]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_7c3kf")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=697294723]
-shape = SubResource("RectangleShape2D_au6nw")
-disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1862287666]
 texture_filter = 1
 texture = ExtResource("2_7c3kf")
 hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=697294723]
+position = Vector2(-1.5, 47.5)
+shape = SubResource("RectangleShape2D_au6nw")
 
 [node name="WonderingMovingTimer" type="Timer" parent="." unique_id=282613173]
 wait_time = 2.0
