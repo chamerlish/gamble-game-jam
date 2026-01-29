@@ -6,7 +6,11 @@ var player_inside: bool
 func _ready() -> void:
 	$PickUpLabel.hide()
 	GlobalMachine.entity_list.append(self)
+	Global.expand.connect(expand)
 
+func expand() -> void:
+	position.x += Global.TILE_SIZE.y + 30
+	position.y -= Global.TILE_SIZE.x + 30 # IDK WHY BTW
 
 func _process(delta: float) -> void:
 	if position.y > Global.player_node.position.y + 30:
