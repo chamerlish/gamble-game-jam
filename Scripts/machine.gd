@@ -45,7 +45,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#print("available", available)
 	#print("broken:", broken)
-	if mouse_inside:
+	if mouse_inside and placed:
 		if Input.is_action_just_pressed("click"):
 			level += 1
 	

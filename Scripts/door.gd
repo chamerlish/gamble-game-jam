@@ -7,13 +7,14 @@ var can_spawn: bool = true
 func _ready() -> void:
 	
 	next_wave = generate_next_wave()
-	
 
 	
 	spawn_customer(next_wave)
 
 func _process(delta: float) -> void:
-	z_index = -1 
+	if position.y > Global.player_node.position.y + 30:
+		z_index = 100
+	else: z_index = -1
 
 func spawn_customer(nums_cus: int) -> void:
 	#$Bell.play()

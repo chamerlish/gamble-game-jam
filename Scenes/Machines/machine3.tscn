@@ -95,8 +95,8 @@ _data = {
 
 [sub_resource type="ImageTexture" id="ImageTexture_j5ob7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5ob7"]
-size = Vector2(275, 190)
+[sub_resource type="CircleShape2D" id="CircleShape2D_03bol"]
+radius = 100.49876
 
 [node name="Machine" type="StaticBody2D" unique_id=505009225]
 y_sort_enabled = true
@@ -196,9 +196,8 @@ theme_override_icons/grabber = SubResource("ImageTexture_j5ob7")
 
 [node name="MouseTweakArea" type="Area2D" parent="." unique_id=287962147]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseTweakArea" unique_id=364140065]
-position = Vector2(-3.5, -3)
-shape = SubResource("RectangleShape2D_j5ob7")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseTweakArea" unique_id=466222472]
+shape = SubResource("CircleShape2D_03bol")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1619014213]
 stream = ExtResource("4_03bol")

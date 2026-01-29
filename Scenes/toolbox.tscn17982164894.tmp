@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bh0an1bffan6f"]
+
+[ext_resource type="Texture2D" uid="uid://bgh1vrywyahh3" path="res://Resources/Sprites/Rarities/toolbox.png" id="1_5ny7h"]
+[ext_resource type="Script" uid="uid://bflup6kdewt4g" path="res://Scripts/toolbox.gd" id="1_up8qv"]
+[ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="3_jieyh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_up8qv"]
+radius = 73.33485
+
+[node name="Toolbox" type="Area2D" unique_id=2015863787]
+script = ExtResource("1_up8qv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1951728126]
+texture_filter = 1
+texture = ExtResource("1_5ny7h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1805694715]
+shape = SubResource("CircleShape2D_up8qv")
+
+[node name="PickUpLabel" type="RichTextLabel" parent="." unique_id=2036168427]
+offset_left = -150.0
+offset_top = -107.0
+offset_right = 150.0
+offset_bottom = 13.0
+theme = ExtResource("3_jieyh")
+theme_override_font_sizes/normal_font_size = 40
+text = "Press Enter To Pick Up"
+fit_content = true
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://drr7hq8vxf7td"]
 
 [ext_resource type="Script" uid="uid://k386x5vabvka" path="res://Scripts/tile_map.gd" id="1_7yui6"]
-[ext_resource type="PackedScene" uid="uid://cvh4be0iakbb8" path="res://Scenes/player.tscn" id="2_go701"]
 [ext_resource type="Texture2D" uid="uid://56r8p83th7w7" path="res://test_tileset.png" id="3_5ukr8"]
 [ext_resource type="Script" uid="uid://bb443gcahs5cc" path="res://Scripts/player_camera.gd" id="5_5v1tr"]
 [ext_resource type="PackedScene" uid="uid://lx7i37jmv8dj" path="res://Scenes/UI/night_sim_hud.tscn" id="5_fo5ed"]
 [ext_resource type="Script" uid="uid://cxwd6ervjdlqw" path="res://Scripts/hud.gd" id="5_k7acu"]
 [ext_resource type="Script" uid="uid://b1h0f1u4onopf" path="res://Scenes/UI/night_sim_hud.gd" id="6_5ukr8"]
 [ext_resource type="Shader" uid="uid://f3sp32cviu0" path="res://Scenes/world.gdshader" id="10_0fj1v"]
+[ext_resource type="PackedScene" uid="uid://cgu38iml7a5lr" path="res://Scenes/door.tscn" id="10_ikia7"]
 [ext_resource type="Script" uid="uid://diitvq7xtv5si" path="res://Scripts/walls.gd" id="11_7yui6"]
+[ext_resource type="PackedScene" uid="uid://bh0an1bffan6f" path="res://Scenes/Toolbox.tscn" id="11_c5t2i"]
+[ext_resource type="PackedScene" uid="uid://cvh4be0iakbb8" path="res://Scenes/player.tscn" id="11_ikia7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5v1tr"]
 texture = ExtResource("3_5ukr8")
@@ -52,7 +54,7 @@ z_index = -1
 texture_filter = 1
 tile_set = SubResource("TileSet_5v1tr")
 
-[node name="Player" parent="." unique_id=1672057571 instance=ExtResource("2_go701")]
+[node name="Player" parent="." unique_id=1672057571 instance=ExtResource("11_ikia7")]
 z_index = 1
 position = Vector2(-55, -64)
 
@@ -115,3 +117,9 @@ metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/BOTTOM" unique_id=1656554378]
 polygon = PackedVector2Array(-511, 342, 609, -297, 552, -357, -574, 286)
+
+[node name="Door" parent="." unique_id=501344013 instance=ExtResource("10_ikia7")]
+position = Vector2(-442, -441)
+
+[node name="Toolbox2" parent="." unique_id=653820109 instance=ExtResource("11_c5t2i")]
+position = Vector2(432, -342)
