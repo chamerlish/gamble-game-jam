@@ -17,6 +17,7 @@ func _on_pressed() -> void:
 		Global.loose_money(get_price())
 		level += 1
 		$PriceLabel.text = str(get_price()) + "$"
+		$AudioStreamPlayer.play()
 	else:
 		_shake_strengh = 10
 

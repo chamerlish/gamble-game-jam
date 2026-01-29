@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://7hmk1agh6my2" path="res://icon.svg" id="2_tbp50"]
 [ext_resource type="Script" uid="uid://04xk0h152j75" path="res://Scenes/UI/upgrade_button.gd" id="3_hu0pb"]
 [ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="4_ym3bv"]
+[ext_resource type="AudioStream" uid="uid://bl7rvwdlofqdb" path="res://Resources/SFX/upgrade1.wav" id="5_hw2ke"]
 
 [node name="NightSimHUD" type="Control" unique_id=1582504801]
 layout_mode = 3
@@ -71,5 +72,8 @@ grow_vertical = 0
 theme = ExtResource("4_ym3bv")
 theme_override_constants/shadow_outline_size = 10
 theme_override_constants/outline_size = 10
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CasinoUpgrade/UpgradeButton" unique_id=1264714281]
+stream = ExtResource("5_hw2ke")
 
 [connection signal="pressed" from="CasinoUpgrade/UpgradeButton" to="CasinoUpgrade/UpgradeButton" method="_on_pressed"]
