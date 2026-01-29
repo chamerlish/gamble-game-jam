@@ -15,6 +15,7 @@ grow_vertical = 2
 pivot_offset = Vector2(0.5, 0.5)
 pivot_offset_ratio = Vector2(0.5, 0)
 size_flags_vertical = 4
+mouse_filter = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="MachinePlace" type="HBoxContainer" parent="." unique_id=1171008364]
@@ -27,13 +28,16 @@ offset_bottom = -50.0
 
 [node name="MachineSelectionButton" parent="MachinePlace" unique_id=1529520326 instance=ExtResource("1_0vmel")]
 layout_mode = 2
+mouse_filter = 1
 machine_id = 0
 
 [node name="MachineSelectionButton2" parent="MachinePlace" unique_id=1514242693 instance=ExtResource("1_0vmel")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="MachineSelectionButton3" parent="MachinePlace" unique_id=1605467303 instance=ExtResource("1_0vmel")]
 layout_mode = 2
+mouse_filter = 1
 machine_id = 2
 
 [node name="CasinoUpgrade" type="VBoxContainer" parent="." unique_id=1154626568]
@@ -49,6 +53,7 @@ grow_horizontal = 0
 
 [node name="UpgradeButton" type="TextureButton" parent="CasinoUpgrade" unique_id=935761237]
 layout_mode = 2
+mouse_filter = 1
 texture_normal = ExtResource("2_tbp50")
 script = ExtResource("3_hu0pb")
 

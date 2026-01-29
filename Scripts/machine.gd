@@ -16,6 +16,7 @@ class_name Machine
 @export var odds_of_winning: float = 0.1
 @export var prize_money: int = 100
 @export var price: int = 100
+@export var level: int = 1
 
 @onready var roll_sfx: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
@@ -23,7 +24,6 @@ class_name Machine
 var nums_of_clicks: int 
 
 var isDraggin: bool
-
 
 var available = true
 var mouse_inside := false
@@ -33,6 +33,9 @@ var broken = false
 
 
 func _ready() -> void:
+	
+	$MouseTweakArea.mouse_entered.connect(func(): mouse_inside = true)
+	$MouseTweakArea.mouse_exited.connect(func(): mouse_inside = false)
 	panel_tweak.hide()
 	# TODO: fix this
 	texture = $Sprite2D.texture
@@ -43,21 +46,25 @@ func _process(delta: float) -> void:
 	#print("available", available)
 	#print("broken:", broken)
 	if mouse_inside:
-		nums_of_clicks += 1
-		if Input.is_action_just_pressed("click") and nums_of_clicks > 0:
-			panel_tweak.show()
+		if Input.is_action_just_pressed("click"):
+			level += 1
 	
 	else:
 		panel_tweak.hide()
 	
-	$HUD/Panel/ProgressBar.value = $HUD/Panel/Slider.value
+	# $HUD/Panel/ProgressBar.value = $HUD/Panel/Slider.value
 	z_index = GlobalMachine.get_entity_z(self)
 	
 	if Input.is_action_pressed("click") and not placed:
 		placable_mode()
 		
-	if placed == false:
+	if !placed:
 		available = false
+	
+	else:
+		if Global.night:
+			
+			pass
 		
 	
 
@@ -98,12 +105,13 @@ func win_money(amount: float):
 	$AnimationPlayer.play("money_gain")
 
 
-#func _on_mouse_tweak_area_mouse_entered() -> void:
-#	mouse_inside = true
+func _on_mouse_tweak_area_mouse_entered() -> void:
+	mouse_inside = true
 
 
-#func _on_mouse_tweak_area_mouse_exited() -> void:
-#	mouse_inside = false
+func _on_mouse_tweak_area_mouse_exited() -> void:
+	mouse_inside = false
+	print("fuck")
 
 
 #func _on_slider_drag_ended(value_changed: bool) -> void:

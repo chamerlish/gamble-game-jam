@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://bt8m83n30ghrx"]
+
+[ext_resource type="PackedScene" uid="uid://cvh4be0iakbb8" path="res://Scenes/player.tscn" id="1_ka2pi"]
+[ext_resource type="Script" uid="uid://k386x5vabvka" path="res://Scripts/tile_map.gd" id="2_omtrn"]
+[ext_resource type="Texture2D" uid="uid://56r8p83th7w7" path="res://test_tileset.png" id="3_i6t4g"]
+[ext_resource type="Script" uid="uid://bb443gcahs5cc" path="res://Scripts/player_camera.gd" id="4_h2ono"]
+[ext_resource type="Script" uid="uid://cxwd6ervjdlqw" path="res://Scripts/hud.gd" id="5_on4kn"]
+[ext_resource type="PackedScene" uid="uid://lx7i37jmv8dj" path="res://Scenes/UI/night_sim_hud.tscn" id="6_70gml"]
+[ext_resource type="Script" uid="uid://b1h0f1u4onopf" path="res://Scenes/UI/night_sim_hud.gd" id="7_8va2t"]
+[ext_resource type="Shader" uid="uid://f3sp32cviu0" path="res://Scenes/world.gdshader" id="8_8mnmb"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p8jf4"]
+texture = ExtResource("3_i6t4g")
+texture_region_size = Vector2i(112, 128)
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_p1f1o"]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(112, 64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_p8jf4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_koko0"]
+shader = ExtResource("8_8mnmb")
+shader_parameter/horizontalMovement = 0.1
+shader_parameter/verticalMovement = 0.1
+shader_parameter/frequencyStar = 0.1
+shader_parameter/sizeStar = 100.0
+shader_parameter/brightnessStar = 3.0
+shader_parameter/shineFrequencyStar = 10.0
+shader_parameter/transparencyStar = 0.0
+shader_parameter/starIterations = 3
+shader_parameter/frequencyBgStar = 0.996
+shader_parameter/shineFrequencyBgStar = 1.0
+shader_parameter/transparencyBgStar = 0.0
+shader_parameter/colorBackground = Color(0.05, 0.04, 0.2, 1)
+shader_parameter/transparencyBackground = 0.0
+shader_parameter/seed = 0.0
+
+[node name="Tutorial" type="Node2D" unique_id=1900762206]
+
+[node name="Player" parent="." unique_id=1150821834 instance=ExtResource("1_ka2pi")]
+position = Vector2(357, 315)
+
+[node name="TileMap" type="Node2D" parent="." unique_id=665482467]
+y_sort_enabled = true
+script = ExtResource("2_omtrn")
+
+[node name="TileSet" type="TileMapLayer" parent="TileMap" unique_id=379788840]
+z_index = -1
+texture_filter = 1
+tile_set = SubResource("TileSet_p1f1o")
+
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=1922224612]
+script = ExtResource("4_h2ono")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1373287938]
+script = ExtResource("5_on4kn")
+
+[node name="NightSimHUD" parent="HUD" unique_id=1582504801 instance=ExtResource("6_70gml")]
+script = ExtResource("7_8va2t")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1669662623]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=1674043599]
+material = SubResource("ShaderMaterial_koko0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

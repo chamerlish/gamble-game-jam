@@ -203,6 +203,3 @@ shape = SubResource("RectangleShape2D_aoebm")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1816806506]
 stream = ExtResource("4_yj5fb")
 bus = &"SFX"
-
-[connection signal="mouse_entered" from="MouseTweakArea" to="." method="_on_mouse_tweak_area_mouse_entered"]
-[connection signal="mouse_exited" from="MouseTweakArea" to="." method="_on_mouse_tweak_area_mouse_exited"]
