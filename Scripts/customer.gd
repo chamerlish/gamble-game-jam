@@ -133,3 +133,15 @@ func get_random_direction() -> Vector2:
 func get_random_machine() -> Machine:
 	GlobalMachine.available_machine_list.shuffle()
 	return GlobalMachine.available_machine_list[0]
+
+@export var base_trash_delay: int = 10
+var trash_scene := preload("res://Scenes/trash.tscn")
+
+func _on_trash_timer_timeout() -> void:
+	$TrashTimer.wait_time = min(base_trash_delay - Global.difficulty, 5)
+	var throw_trash_chance = randi_range(-1, 1)
+	if throw_trash_chance < 10:
+		print("he")
+		var trash = trash_scene.instantiate()
+		trash.global_position = global_position
+		get_tree().get_root().add_child(trash)
