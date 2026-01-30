@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://by85xii2v4q2a"]
+
+[ext_resource type="Texture2D" uid="uid://qdsoqi70f5as" path="res://Resources/Sprites/Rarities/counter.png" id="1_5wupd"]
+[ext_resource type="Script" uid="uid://bujqx143htpbu" path="res://Scripts/counter.gd" id="1_odkjx"]
+[ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="2_dfxaj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dfxaj"]
+radius = 193.49419
+
+[node name="Counter" type="Area2D" unique_id=1661481736]
+script = ExtResource("1_odkjx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=791935126]
+texture_filter = 1
+texture = ExtResource("1_5wupd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=984578637]
+shape = SubResource("CircleShape2D_dfxaj")
+
+[node name="InterractLabel" type="RichTextLabel" parent="." unique_id=366097922]
+texture_filter = 1
+offset_left = -134.0
+offset_top = -142.0
+offset_right = 134.0
+offset_bottom = -62.0
+theme = ExtResource("2_dfxaj")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 40
+text = "Press Enter to Interact"
+fit_content = true
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
