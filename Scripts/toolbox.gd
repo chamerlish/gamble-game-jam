@@ -9,8 +9,8 @@ func _ready() -> void:
 	Global.expand.connect(expand)
 
 func expand() -> void:
-	position.x += Global.TILE_SIZE.y + 30
-	position.y -= Global.TILE_SIZE.x + 30 # IDK WHY BTW
+	position.x += Global.TILE_SIZE.y + Global.GRID_SIZE.y / 4
+	position.y -= Global.TILE_SIZE.x + Global.GRID_SIZE.y / 4 # IDK WHY BTW
 
 func _process(delta: float) -> void:
 	if position.y > Global.player_node.position.y + 30:

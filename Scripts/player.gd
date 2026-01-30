@@ -14,17 +14,17 @@ var speed: float
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+func expand():
+	position.x += Global.TILE_SIZE.y + Global.GRID_SIZE.y / 4
+	position.y += Global.TILE_SIZE.x + Global.GRID_SIZE.y / 4
 
 func _ready() -> void:
+	Global.expand.connect(expand)
 	Global.player_node = self
 	GlobalMachine.selected_machine_changed.connect(pick_machine)
 	Global.mid_switch_night_state.connect(switch_player_state)
 	
 func switch_player_state():
-	if Global.night:
-		night_mode()
-	else:
-		sprite.show()
 	
 	clear_selected_machine()
 	
@@ -86,10 +86,7 @@ var squish_timer: float = 2
 func _physics_process(delta: float) -> void:
 	z_index = GlobalMachine.get_entity_z(self)
 	speed = velocity.length()
-	
-	
-	if Input.is_action_just_pressed("ui_accept"):
-		Global.change_night_state()
+
 
 	var input_dir := Vector2(
 		Input.get_axis("move_left", "move_right"),
@@ -132,8 +129,6 @@ func _physics_process(delta: float) -> void:
 
 	scale = lerp(scale, Vector2(1,1), 0.2)
 
-func night_mode():
-	sprite.hide()
 
 func pick_machine(id: int):
 	clear_selected_machine()

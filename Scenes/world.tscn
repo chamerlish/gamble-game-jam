@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://diitvq7xtv5si" path="res://Scripts/walls.gd" id="11_7yui6"]
 [ext_resource type="PackedScene" uid="uid://bh0an1bffan6f" path="res://Scenes/Toolbox.tscn" id="11_c5t2i"]
 [ext_resource type="PackedScene" uid="uid://cvh4be0iakbb8" path="res://Scenes/player.tscn" id="11_ikia7"]
+[ext_resource type="PackedScene" uid="uid://by85xii2v4q2a" path="res://Scenes/counter.tscn" id="12_7yui6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5v1tr"]
 texture = ExtResource("3_5ukr8")
@@ -41,6 +42,18 @@ shader_parameter/transparencyBgStar = 0.0
 shader_parameter/colorBackground = Color(0.05, 0.04, 0.2, 1)
 shader_parameter/transparencyBackground = 0.0
 shader_parameter/seed = 0.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7yui6"]
+normal = Vector2(-0.503851, 0.8637906)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kn0ld"]
+normal = Vector2(-0.49972245, 0.86618555)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e0ngr"]
+normal = Vector2(0.49613893, -0.86824316)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_c5t2i"]
+normal = Vector2(0.5069555, -0.8619722)
 
 [node name="World" type="Node2D" unique_id=1724012538]
 metadata/_edit_horizontal_guides_ = [832.0]
@@ -84,43 +97,48 @@ mouse_filter = 2
 script = ExtResource("11_7yui6")
 
 [node name="TOP" type="StaticBody2D" parent="Walls" unique_id=1235188867]
-position = Vector2(-554, -373)
+position = Vector2(-581, -308)
 collision_layer = 3
 collision_mask = 3
 metadata/_edit_group_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/TOP" unique_id=97227095]
-polygon = PackedVector2Array(-511, 342, 609, -297, 552, -357, -594, 282)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TOP" unique_id=1834486919]
+rotation = -1.0471976
+shape = SubResource("WorldBoundaryShape2D_7yui6")
 
 [node name="RIGHT" type="StaticBody2D" parent="Walls" unique_id=742304226]
-position = Vector2(626, -381)
+position = Vector2(703, -303)
 collision_layer = 3
 collision_mask = 3
 metadata/_edit_group_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/RIGHT" unique_id=1382977775]
-polygon = PackedVector2Array(-571, -290, 496, 320, 558, 278, -547, -341)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RIGHT" unique_id=1812365501]
+shape = SubResource("WorldBoundaryShape2D_kn0ld")
 
 [node name="LEFT" type="StaticBody2D" parent="Walls" unique_id=1936806467]
-position = Vector2(-520, 311)
+position = Vector2(-507, 291)
 collision_layer = 3
 collision_mask = 3
 metadata/_edit_group_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/LEFT" unique_id=206394693]
-polygon = PackedVector2Array(-571, -290, 496, 320, 524, 270, -547, -341)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LEFT" unique_id=248678508]
+shape = SubResource("WorldBoundaryShape2D_e0ngr")
 
 [node name="BOTTOM" type="StaticBody2D" parent="Walls" unique_id=100133353]
-position = Vector2(569, 296)
+position = Vector2(538, 272)
 collision_layer = 3
 collision_mask = 3
 metadata/_edit_group_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/BOTTOM" unique_id=1656554378]
-polygon = PackedVector2Array(-511, 342, 609, -297, 552, -357, -574, 286)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BOTTOM" unique_id=540416637]
+rotation = -1.0471976
+shape = SubResource("WorldBoundaryShape2D_c5t2i")
 
 [node name="Door" parent="." unique_id=501344013 instance=ExtResource("10_ikia7")]
 position = Vector2(-440, -448)
 
 [node name="Toolbox2" parent="." unique_id=653820109 instance=ExtResource("11_c5t2i")]
 position = Vector2(432, -342)
+
+[node name="Counter" parent="." unique_id=1661481736 instance=ExtResource("12_7yui6")]
+position = Vector2(440, 192)
