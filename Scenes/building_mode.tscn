@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://0dwle8arroug"]
+
+[ext_resource type="Script" uid="uid://kowlhe4uhnfs" path="res://Scripts/building_mode.gd" id="1_815kh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0s0i"]
+
+[node name="BuildingMode" type="CharacterBody2D" unique_id=1984526871]
+script = ExtResource("1_815kh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=745427282]
+shape = SubResource("RectangleShape2D_m0s0i")
+disabled = true

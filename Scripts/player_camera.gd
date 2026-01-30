@@ -14,15 +14,18 @@ func trigger_shake(_shake_strengh: float = 10.0) -> void:
 	self._shake_strengh = _shake_strengh
 
 func _process(delta: float) -> void:
-	camera_follow_player(delta)
+	if Global.night:
+		follow_node(delta, Global.building_mode_node)
+	else:
+		follow_node(delta, Global.player_node)
 	
 	if _shake_strengh > 0:
 		_shake_strengh = lerp(_shake_strengh, 0.0, SHAKE_FADE * delta)
 		offset = Vector2(randf_range(-_shake_strengh, _shake_strengh), randf_range(-_shake_strengh, _shake_strengh))
 
 
-func camera_follow_player(delta: float) -> void:
+func follow_node(delta: float, node: CharacterBody2D) -> void:
 	global_position = global_position.lerp(
-		Global.player_node.global_position,
+		node.global_position,
 		CAMERA_FOLLOW_SPEED * delta
 	)

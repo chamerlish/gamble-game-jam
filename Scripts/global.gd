@@ -28,7 +28,7 @@ func cartesian_to_isometric(cartesian: Vector2) -> Vector2:
 	return iso
 
 var player_node: CharacterBody2D
-
+var building_mode_node: CharacterBody2D
 # To go from day to night and from night to day
 func change_night_state():
 	camera_node.trigger_shake(5.0)

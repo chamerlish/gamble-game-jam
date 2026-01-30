@@ -92,18 +92,21 @@ func _physics_process(delta: float) -> void:
 		Input.get_axis("move_left", "move_right"),
 		Input.get_axis("move_up", "move_down")
 	)
-	animate(input_dir)
-	
-	
-	input_dir = Global.cartesian_to_isometric(input_dir)
-	
-	if input_dir != Vector2.ZERO and not Global.night:
-		input_dir = input_dir.normalized()
-		var target_velocity = input_dir * MAX_SPEED
-		velocity = velocity.move_toward(target_velocity, ACCEL * delta)
-	else:
-		velocity = velocity.move_toward(Vector2.ZERO, 2*ACCEL/3 * delta)
 
+
+	
+	if not Global.night:
+		animate(input_dir)
+		input_dir = Global.cartesian_to_isometric(input_dir)
+		if input_dir != Vector2.ZERO:
+			input_dir = input_dir.normalized()
+			var target_velocity = input_dir * MAX_SPEED
+			velocity = velocity.move_toward(target_velocity, ACCEL * delta)
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, 2*ACCEL/3 * delta)
+	else:
+		velocity = Vector2(0, 0)
+		animate(velocity)
 
 	move_and_slide()
 	
