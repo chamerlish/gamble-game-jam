@@ -194,9 +194,9 @@ grow_vertical = 2
 theme = ExtResource("3_j5ob7")
 theme_override_icons/grabber = SubResource("ImageTexture_j5ob7")
 
-[node name="MouseTweakArea" type="Area2D" parent="." unique_id=287962147]
+[node name="InteractionArea" type="Area2D" parent="." unique_id=287962147]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseTweakArea" unique_id=466222472]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=466222472]
 shape = SubResource("CircleShape2D_03bol")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1619014213]

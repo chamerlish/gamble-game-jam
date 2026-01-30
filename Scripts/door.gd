@@ -33,7 +33,6 @@ func generate_next_wave() -> int:
 
 func _on_wave_delay_timeout() -> void:
 	next_wave = generate_next_wave()
-	print(next_wave)
 	spawn_customer(next_wave)
 	if randi_range(0, 10) < 8 and Global.difficulty < Global.MAX_DIFFICULTY: Global.difficulty += 1
 

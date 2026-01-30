@@ -19,14 +19,14 @@ shape = SubResource("CircleShape2D_lxlcj")
 
 [node name="PickUpLabel" type="RichTextLabel" parent="." unique_id=1248800681]
 texture_filter = 1
-offset_left = -134.0
+offset_left = -128.0
 offset_top = -142.0
-offset_right = 134.0
+offset_right = 128.0
 offset_bottom = -62.0
 theme = ExtResource("3_7vbui")
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 40
-text = "Press Enter to Pick Up"
+text = "Press E to Pick Up"
 fit_content = true
 horizontal_alignment = 1
 

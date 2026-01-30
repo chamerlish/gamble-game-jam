@@ -27,15 +27,19 @@ var isDraggin: bool
 
 var available = true
 var mouse_inside := false
+var player_inside := false
+
 
 var broken = false
 
 
 
+
 func _ready() -> void:
 	
-	$MouseTweakArea.mouse_entered.connect(func(): mouse_inside = true)
-	$MouseTweakArea.mouse_exited.connect(func(): mouse_inside = false)
+	$InteractionArea.mouse_entered.connect(func(): mouse_inside = true)
+	$InteractionArea.mouse_exited.connect(func(): mouse_inside = false)
+	
 	panel_tweak.hide()
 	# TODO: fix this
 	texture = $Sprite2D.texture
@@ -48,6 +52,13 @@ func _process(delta: float) -> void:
 	if mouse_inside and placed:
 		if Input.is_action_just_pressed("click"):
 			level += 1
+			Global.camera_node.trigger_shake()
+	
+	if player_inside:
+		if broken:
+			if Input.is_action_just_pressed("interact"):
+				fix_machine()
+				Global.amount_toolbox -= 1
 	
 	else:
 		panel_tweak.hide()
@@ -105,14 +116,6 @@ func win_money(amount: float):
 	$AnimationPlayer.play("money_gain")
 
 
-func _on_mouse_tweak_area_mouse_entered() -> void:
-	mouse_inside = true
-
-
-func _on_mouse_tweak_area_mouse_exited() -> void:
-	mouse_inside = false
-	print("fuck")
-
 
 #func _on_slider_drag_ended(value_changed: bool) -> void:
 #	odds_of_winning = panel_tweak.get_node("Slider").value / 100
@@ -124,6 +127,21 @@ func break_machine():
 	modulate.b=1
 	print("broookennn")
 	
+func fix_machine():
+	broken = false
+	available = true
+	GlobalMachine.available_machine_list.append(self)
+	modulate.b = 0
+	print("fixxxxedd")
+	
 func play_sfx():
 	if roll_sfx:
 		roll_sfx.play()
+
+
+func _on_interaction_area_body_entered(body: Node2D) -> void:
+	player_inside = body == Global.player_node
+
+
+func _on_interaction_area_body_exited(body: Node2D) -> void:
+	player_inside = !(body == Global.player_node)

@@ -118,7 +118,6 @@ func _on_playing_timer_timeout() -> void:
 	
 	if machine_in_use.broken != true:
 		machine_in_use.available = true
-		print(machine_in_use.available)
 		GlobalMachine.available_machine_list.append(machine_in_use)
 		machine_in_use.get_node("Sprite2D").modulate.r = 0.5
 

@@ -2,6 +2,8 @@ extends Area2D
 
 var player_inside: bool
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$PickUpLabel.hide()
@@ -18,10 +20,9 @@ func _process(delta: float) -> void:
 	else: z_index = -1
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("interact"):
 		if player_inside:
-			# TODO: do this
-			pass
+			Global.amount_toolbox = 3
 
 func _on_body_exited(body: Node2D) -> void:
 	if body == Global.player_node:

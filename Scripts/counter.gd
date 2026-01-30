@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 	else: z_index = -1
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("interact"):
 		if player_inside:
 			Global.change_night_state()
 

@@ -12,6 +12,12 @@ signal finish_switch_night_state
 signal mid_switch_night_state
 
 signal expand
+signal toolbox_use(value)
+
+var amount_toolbox: int = 0:
+	set(value):
+		amount_toolbox = value
+		toolbox_use.emit()
 
 var difficulty: int = 1
 const MAX_DIFFICULTY: int = 8
