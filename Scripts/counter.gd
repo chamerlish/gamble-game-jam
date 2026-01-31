@@ -19,8 +19,9 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
-		if player_inside:
+		if player_inside or Global.night:
 			Global.change_night_state()
+			
 
 func _on_body_exited(body: Node2D) -> void:
 	if body == Global.player_node:

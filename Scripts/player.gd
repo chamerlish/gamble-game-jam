@@ -82,6 +82,7 @@ func animate(direction: Vector2) -> void:
 			sprite.stop()
 			sprite.frame = 3
 			
+
 var squish_timer: float = 2
 func _physics_process(delta: float) -> void:
 	z_index = GlobalMachine.get_entity_z(self)
