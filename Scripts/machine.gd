@@ -6,12 +6,14 @@ class_name Machine
 
 @export var placed: bool
 
-@onready var collision: CollisionPolygon2D = $CollisionPolygon2D
+
+@onready var _left_right_collision: CollisionPolygon2D = $LeftRightCollision
+@onready var _up_down_collision: CollisionPolygon2D = $UpDownCollision
+
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var panel_tweak: Panel = $HUD/Panel
 
-
-@export var texture: CompressedTexture2D
 @export var machine_name: String
 @export var odds_of_winning: float = 0.1
 @export var prize_money: int = 100
@@ -41,18 +43,15 @@ func _ready() -> void:
 	$InteractionArea.mouse_exited.connect(func(): mouse_inside = false)
 	
 	panel_tweak.hide()
-	# TODO: fix this
-	texture = $Sprite2D.texture
 	GlobalMachine.all_machines_list.append(self)
 
 
 func _process(delta: float) -> void:
-	#print("available", available)
-	#print("broken:", broken)
 	if mouse_inside and placed:
 		if Input.is_action_just_pressed("click"):
-			level += 1
+			level = min(level + 1, 3)
 			Global.camera_node.trigger_shake()
+			update_sprite()
 	
 	if player_inside:
 		if broken:
@@ -77,25 +76,37 @@ func _process(delta: float) -> void:
 			
 			pass
 		
-	
+
+func update_sprite():
+	sprite.frame_coords.y = level - 1
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_released("click") and not placed:
-		place_machine()
+	if not placed:
+		if event.is_action_released("rotate"):
+			sprite.frame_coords.x = (sprite.frame_coords.x + 1) % 4
+			resolve_collisions()
+		if event.is_action_released("click"):
+			place_machine()
 		
 func placable_mode():
 	var mouse_pos = get_global_mouse_position().snapped(Global.TILE_SIZE)
 	
-	collision.disabled = true
-	sprite.modulate.a = 0.5
+	_left_right_collision.disabled = true
+	_up_down_collision.disabled = true
 	
 	global_position = mouse_pos
 	
+
+func resolve_collisions():
+	_left_right_collision.disabled = sprite.frame_coords.x % 2 != 0
+	_up_down_collision.disabled = not _left_right_collision.disabled
+
 func place_machine():
 	placed = true
 	available = true
-	collision.disabled = false
-	sprite.modulate.a = 1
+	
+	resolve_collisions()
+
 	Global.camera_node.trigger_shake()
 	GlobalMachine.placed_machine_list.append(self)
 	GlobalMachine.available_machine_list.append(self)
@@ -115,24 +126,17 @@ func win_money(amount: float):
 	money_gain_label.text = "+ " + str(amount) + " $"
 	$AnimationPlayer.play("money_gain")
 
-
-
-#func _on_slider_drag_ended(value_changed: bool) -> void:
-#	odds_of_winning = panel_tweak.get_node("Slider").value / 100
-
 func break_machine():
 	broken = true
 	available = false
 	GlobalMachine.available_machine_list.erase(self)
 	modulate.b=1
-	print("broookennn")
 	
 func fix_machine():
 	broken = false
 	available = true
 	GlobalMachine.available_machine_list.append(self)
 	modulate.b = 0
-	print("fixxxxedd")
 	
 func play_sfx():
 	if roll_sfx:

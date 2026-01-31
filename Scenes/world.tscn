@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://cvh4be0iakbb8" path="res://Scenes/player.tscn" id="11_ikia7"]
 [ext_resource type="PackedScene" uid="uid://by85xii2v4q2a" path="res://Scenes/counter.tscn" id="12_7yui6"]
 [ext_resource type="PackedScene" uid="uid://0dwle8arroug" path="res://Scenes/building_mode.tscn" id="13_c5t2i"]
-[ext_resource type="PackedScene" uid="uid://b0srxscexfb7t" path="res://Scenes/trash.tscn" id="16_hgpy0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5v1tr"]
 texture = ExtResource("3_5ukr8")
@@ -170,6 +169,3 @@ position = Vector2(432, -342)
 position = Vector2(440, 192)
 
 [node name="BuildingMode" parent="." unique_id=1984526871 instance=ExtResource("13_c5t2i")]
-
-[node name="Trash" parent="." unique_id=1018567599 instance=ExtResource("16_hgpy0")]
-position = Vector2(-220, 64)

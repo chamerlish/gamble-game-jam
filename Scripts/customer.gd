@@ -83,7 +83,6 @@ func walk_away():
 			machine_in_use.available = true
 			if not GlobalMachine.available_machine_list.has(machine_in_use):
 				GlobalMachine.available_machine_list.append(machine_in_use)
-			machine_in_use.get_node("Sprite2D").modulate.r = 0.5
 		machine_in_use = null
 	
 	# Set target to door and start moving
@@ -127,7 +126,6 @@ func try_go_play() -> void:
 	if machine_in_use.available:
 		machine_in_use.available = false
 		GlobalMachine.available_machine_list.erase(machine_in_use)
-		machine_in_use.get_node("Sprite2D").modulate.r = 10
 
 		target_position = machine_in_use.global_position
 		target_direction = (target_position - global_position).normalized()
@@ -160,7 +158,6 @@ func _on_playing_timer_timeout() -> void:
 	if machine_in_use.broken != true:
 		machine_in_use.available = true
 		GlobalMachine.available_machine_list.append(machine_in_use)
-		machine_in_use.get_node("Sprite2D").modulate.r = 0.5
 
 	machine_in_use = null
 	current_state = State.Wondering
