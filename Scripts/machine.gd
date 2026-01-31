@@ -19,6 +19,7 @@ class_name Machine
 @export var prize_money: int = 100
 @export var price: int = 100
 @export var level: int = 1
+@export var MAX_LEVEL: int = 3
 
 @onready var roll_sfx: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
@@ -45,11 +46,10 @@ func _ready() -> void:
 	panel_tweak.hide()
 	GlobalMachine.all_machines_list.append(self)
 
-
 func _process(delta: float) -> void:
 	if mouse_inside and placed:
 		if Input.is_action_just_pressed("click"):
-			level = min(level + 1, 3)
+			level = min(level + 1, MAX_LEVEL)
 			Global.camera_node.trigger_shake()
 			update_sprite()
 	
@@ -78,7 +78,7 @@ func _process(delta: float) -> void:
 		
 
 func update_sprite():
-	sprite.frame_coords.y = level - 1
+	sprite.frame_coords.y = level - 1 + (int(broken) * MAX_LEVEL) # heh this is pretty cool ain't it?
 
 func _input(event: InputEvent) -> void:
 	if not placed:
@@ -130,13 +130,13 @@ func break_machine():
 	broken = true
 	available = false
 	GlobalMachine.available_machine_list.erase(self)
-	modulate.b=1
+	update_sprite()
 	
 func fix_machine():
 	broken = false
 	available = true
 	GlobalMachine.available_machine_list.append(self)
-	modulate.b = 0
+	update_sprite()
 	
 func play_sfx():
 	if roll_sfx:

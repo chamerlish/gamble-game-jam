@@ -101,12 +101,6 @@ radius = 100.49876
 [node name="BlackJack" type="StaticBody2D" unique_id=1938691]
 y_sort_enabled = true
 script = ExtResource("1_tyhdf")
-placed = null
-machine_name = null
-odds_of_winning = null
-prize_money = null
-price = null
-level = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=623247675]
 texture_filter = 1

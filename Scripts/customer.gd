@@ -152,7 +152,7 @@ func _on_playing_timer_timeout() -> void:
 		machine_in_use.win_money(25)
 	
 	var chance_of_breaking:= randi_range(0, 10)
-	if chance_of_breaking > 8:
+	if chance_of_breaking > 8 - min(3, Global.difficulty- 1):
 		machine_in_use.break_machine()
 	
 	if machine_in_use.broken != true:
