@@ -27,21 +27,34 @@ var target_position: Vector2
 
 var time := 0.0
 
+var door_position: Vector2
+
+var is_walking_away := false
+
 func _ready() -> void:
 	# pick one random texture
 	sprite.frame = randi_range(0, 3)
 	
+	# $WalkAwayTimer.wait_time
+	
+	$WalkAwayTimer.start(40 - float(Global.difficulty) / 2 - Global.trash_level)
+
+	
 	scale = Vector2(1.7, 0.4)
 	GlobalMachine.customer_list.append(self)
-
+	
+	global_position = door_position
+	
 	target_direction = get_random_direction()
+	
+	
 	target_direction.y = abs(target_direction.y)
 	current_state = State.Moving
 	$WonderingMovingTimer.start()
 
 func _physics_process(delta: float) -> void:
 	time += delta
-
+	
 	scale = lerp(scale, Vector2.ONE, 0.1)
 	z_index = GlobalMachine.get_entity_z(self)
 
@@ -49,6 +62,10 @@ func _physics_process(delta: float) -> void:
 		State.Moving:
 			walk_around(time)
 			velocity = target_direction * SPEED
+			
+			if global_position.distance_to(door_position) < 50 and is_walking_away:
+				GlobalMachine.customer_list.erase(self)
+				queue_free()
 
 		State.Wondering:
 			velocity = Vector2.ZERO
@@ -57,6 +74,30 @@ func _physics_process(delta: float) -> void:
 			velocity = Vector2.ZERO
 
 	move_and_slide()
+
+func walk_away():
+	is_walking_away = true
+	# Release the machine if customer is using one
+	if machine_in_use != null:
+		if machine_in_use.broken != true:
+			machine_in_use.available = true
+			if not GlobalMachine.available_machine_list.has(machine_in_use):
+				GlobalMachine.available_machine_list.append(machine_in_use)
+			machine_in_use.get_node("Sprite2D").modulate.r = 0.5
+		machine_in_use = null
+	
+	# Set target to door and start moving
+	target_position = door_position
+	target_direction = (target_position - global_position).normalized()
+	current_state = State.Moving
+	
+	# Stop other timers
+	$WonderingMovingTimer.stop()
+	$PlayingTimer.stop()
+	$TrashTimer.stop()
+
+func _on_walk_away_timer_timeout() -> void:
+	walk_away()
 
 func walk_around(t: float) -> void:
 	$Sprite2D.position.y = sin(t * jump_speed) * jump_height

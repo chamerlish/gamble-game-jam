@@ -24,8 +24,8 @@ func spawn_customer(nums_cus: int) -> void:
 	for i in nums_cus:
 		#if can_spawn:
 		var customer := GlobalMachine.customer_scene.instantiate()
+		customer.door_position = global_position
 		get_tree().get_root().add_child(customer)
-		customer.global_position = global_position
 		await get_tree().create_timer(1/ float(Global.difficulty)).timeout
 
 func generate_next_wave() -> int:

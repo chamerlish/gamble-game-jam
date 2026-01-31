@@ -20,6 +20,7 @@ var amount_toolbox: int = 0:
 		toolbox_use.emit()
 
 var difficulty: int = 1
+var trash_level: int = 0
 const MAX_DIFFICULTY: int = 8
 
 var camera_node: Camera2D
