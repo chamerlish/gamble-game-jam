@@ -1,34 +1,31 @@
 [gd_scene format=3 uid="uid://b0srxscexfb7t"]
 
-[ext_resource type="Texture2D" uid="uid://dt8m6iejqv2dx" path="res://Resources/Sprites/Rarities/trash-anime-sheet.png" id="1_c2mmk"]
+[ext_resource type="Texture2D" uid="uid://dt6p422xmw76f" path="res://Resources/Sprites/Rarities/trash-anime-sheet.png" id="1_c2mmk"]
 [ext_resource type="Script" uid="uid://c6rh36nrq4gob" path="res://Scripts/trash.gd" id="1_tsx7w"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c2mmk"]
-atlas = ExtResource("1_c2mmk")
-region = Rect2(0, 0, 112, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tsx7w"]
 atlas = ExtResource("1_c2mmk")
-region = Rect2(112, 0, 112, 128)
+region = Rect2(0, 0, 112, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3xsam"]
 atlas = ExtResource("1_c2mmk")
-region = Rect2(224, 0, 112, 128)
+region = Rect2(112, 0, 112, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xrvdk"]
 atlas = ExtResource("1_c2mmk")
-region = Rect2(336, 0, 112, 128)
+region = Rect2(224, 0, 112, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nt6kh"]
 atlas = ExtResource("1_c2mmk")
-region = Rect2(448, 0, 112, 128)
+region = Rect2(336, 0, 112, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ws752"]
+atlas = ExtResource("1_c2mmk")
+region = Rect2(448, 0, 112, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ws752"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c2mmk")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tsx7w")
 }, {
@@ -40,6 +37,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nt6kh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ws752")
 }],
 "loop": true,
 "name": &"default",
@@ -47,18 +47,18 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ws752"]
-radius = 72.0
+radius = 48.0
 
 [node name="Trash" type="Area2D" unique_id=1018567599]
+z_index = -1
 script = ExtResource("1_tsx7w")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=886819255]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ws752")
-frame_progress = 0.23326796
+frame_progress = 0.546055
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1319428755]
-position = Vector2(0, -32)
 shape = SubResource("CircleShape2D_ws752")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

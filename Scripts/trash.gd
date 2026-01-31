@@ -1,12 +1,16 @@
 extends Area2D
 
-var player_inside
+var player_inside: bool
 
 func _ready() -> void:
-	GlobalMachine.entity_list.append(self)
+	await get_tree().create_timer(0.1).timeout
 	
-func _process(delta: float) -> void:
-	z_index = GlobalMachine.get_entity_z(self)
+	if get_overlapping_areas().size() > 1: # with the customer area and i'm too lazy rn
+		queue_free()
+		
+	for body in get_overlapping_bodies():
+		if body.name == "Door":
+			queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
 	player_inside = body == Global.player_node

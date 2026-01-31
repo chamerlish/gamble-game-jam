@@ -141,7 +141,6 @@ func _on_trash_timer_timeout() -> void:
 	$TrashTimer.wait_time = min(base_trash_delay - Global.difficulty, 5)
 	var throw_trash_chance = randi_range(-1, 1)
 	if throw_trash_chance < 10:
-		print("he")
 		var trash = trash_scene.instantiate()
 		trash.global_position = global_position
 		get_tree().get_root().add_child(trash)
