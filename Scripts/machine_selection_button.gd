@@ -4,15 +4,33 @@ extends Button
 @export var machine_id: int
 @export var machine_scene: PackedScene
 
+var _shake_strengh: float
+const SHAKE_FADE: float = 10.0
+
+var base_position
+
 func _ready() -> void:
 	#$Sprite2D.texture = 
 	icon = get_machine_icon(machine_scene)
 	$PriceLabel.text = str(GlobalMachine.get_machine_price(machine_id)) + "$"
+	base_position = position
 
+
+func _process(delta: float) -> void:
+	
+	if _shake_strengh > 0:
+		_shake_strengh = lerp(_shake_strengh, 0.0, SHAKE_FADE * delta)
+		
+		var offset = Vector2(randf_range(-_shake_strengh, _shake_strengh), 
+							 randf_range(-_shake_strengh, _shake_strengh))
+		position += offset
 
 func _on_button_down() -> void:
-	GlobalMachine.change_selected_machine(machine_id)
-
+	if Global.amount_money > 0:
+		GlobalMachine.change_selected_machine(machine_id)
+	else:
+		_shake_strengh = 10
+	
 func get_machine_icon(machine_scene: PackedScene) -> Texture2D:
 	var machine = machine_scene.instantiate()
 	var sprite := machine.get_node("Sprite2D") as Sprite2D

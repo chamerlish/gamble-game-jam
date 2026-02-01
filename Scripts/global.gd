@@ -48,11 +48,25 @@ var amount_toolbox: int = 0:
 		amount_toolbox = value
 		toolbox_use.emit()
 
-var score_multiplier: float = 1:
+var score_multiplier: float = 1.0:
 	set(value):
 		score_multiplier = value
-		await get_tree().create_timer(20).timeout
-		score_multiplier = 1
+		_restart_multiplier_timer()
+
+var _multiplier_timer: SceneTreeTimer
+var _multiplier_token := 0
+
+func _restart_multiplier_timer():
+	_multiplier_token += 1
+	var token = _multiplier_token
+
+	_multiplier_timer = get_tree().create_timer(20)
+	await _multiplier_timer.timeout
+
+	# Only reset if this is the *latest* timer
+	if token == _multiplier_token:
+		score_multiplier = 1.0
+
 
 var difficulty: int = 1
 var trash_level: int = 0
