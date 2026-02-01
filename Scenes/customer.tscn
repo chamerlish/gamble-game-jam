@@ -9,6 +9,9 @@ size = Vector2(39, 19)
 [sub_resource type="CircleShape2D" id="CircleShape2D_7c3kf"]
 radius = 48.166378
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7c3kf"]
+size = Vector2(72, 121)
+
 [node name="Customer" type="CharacterBody2D" unique_id=1908784811]
 collision_layer = 0
 collision_mask = 2
@@ -32,6 +35,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="InterractionCollider" type="Area2D" parent="." unique_id=406919349]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InterractionCollider" unique_id=92711805]
 shape = SubResource("CircleShape2D_7c3kf")
@@ -45,6 +49,11 @@ autostart = true
 [node name="WalkAwayTimer" type="Timer" parent="." unique_id=1588071884]
 wait_time = 20.0
 autostart = true
+
+[node name="TrashSpawnPreventArea" type="Area2D" parent="." unique_id=689080971]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrashSpawnPreventArea" unique_id=269879489]
+shape = SubResource("RectangleShape2D_7c3kf")
 
 [connection signal="timeout" from="WonderingMovingTimer" to="." method="_on_wondering_moving_timer_timeout"]
 [connection signal="timeout" from="PlayingTimer" to="." method="_on_playing_timer_timeout"]

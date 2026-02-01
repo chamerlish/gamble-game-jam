@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://c1ejq1xu677pa"]
+[gd_scene format=3 uid="uid://bo8u0vt3tkk8i"]
 
-[ext_resource type="Script" uid="uid://v6vl0cvw2mn1" path="res://Scripts/machine.gd" id="1_fj3lg"]
-[ext_resource type="Texture2D" uid="uid://dov80h01qigjx" path="res://abstractTile_25.png" id="2_fj3lg"]
-[ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="3_aoebm"]
-[ext_resource type="AudioStream" uid="uid://bmipxrjhkj5y3" path="res://Resources/SFX/Machines/slot.wav" id="4_yj5fb"]
+[ext_resource type="Script" uid="uid://v6vl0cvw2mn1" path="res://Scripts/machine.gd" id="1_3vla0"]
+[ext_resource type="Texture2D" uid="uid://cyek3q0qd06uu" path="res://Resources/Sprites/Machines/slot_machine.png" id="2_3vla0"]
+[ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="3_bn7wm"]
+[ext_resource type="AudioStream" uid="uid://bmipxrjhkj5y3" path="res://Resources/SFX/Machines/slot.wav" id="4_uivuh"]
 
 [sub_resource type="Animation" id="Animation_8nuxq"]
 length = 0.001
@@ -93,71 +93,82 @@ _data = {
 &"money_loss": SubResource("Animation_txefx")
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_aoebm"]
+[sub_resource type="ImageTexture" id="ImageTexture_txefx"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yj5fb"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_8nuxq"]
 radius = 100.49876
 
-[node name="Machine" type="StaticBody2D" unique_id=1218622631]
+[node name="Slot Machine" type="StaticBody2D" unique_id=1938691]
 y_sort_enabled = true
-script = ExtResource("1_fj3lg")
+script = ExtResource("1_3vla0")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2003606992]
-texture = ExtResource("2_fj3lg")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=623247675]
+texture_filter = 1
+texture = ExtResource("2_3vla0")
+hframes = 4
+vframes = 6
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1032988753]
+[node name="LeftRightCollision" type="CollisionPolygon2D" parent="." unique_id=1992732590]
 y_sort_enabled = true
-polygon = PackedVector2Array(55, 32, 0, 1, -55, 32, 0, 63)
+rotation = -6.2831855
+polygon = PackedVector2Array(-4.196293e-06, 24, -56.000008, 47.99999, -1.3987645e-05, 80, 55.999992, 48.00001)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=990521212]
-root_node = NodePath("../CollisionPolygon2D")
+[node name="UpDownCollision" type="CollisionPolygon2D" parent="." unique_id=242123075]
+y_sort_enabled = true
+polygon = PackedVector2Array(0, 24, -56, 48, 0, 80, 56, 48)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1542537907]
+root_node = NodePath("../LeftRightCollision")
 libraries/ = SubResource("AnimationLibrary_8nuxq")
 
-[node name="HUD" type="Control" parent="." unique_id=1106788287]
+[node name="HUD" type="Control" parent="." unique_id=1136325813]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="MouseFollow" type="Control" parent="HUD" unique_id=1327283692]
+[node name="MouseFollow" type="Control" parent="HUD" unique_id=400267832]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="MoneyGainText" type="RichTextLabel" parent="HUD/MouseFollow" unique_id=1356282671]
+[node name="MoneyGainText" type="RichTextLabel" parent="HUD/MouseFollow" unique_id=1245316273]
+visible = false
 modulate = Color(1, 1, 1, 0)
 z_index = 100
 layout_mode = 0
-offset_right = 114.0
-offset_bottom = 78.0
-theme = ExtResource("3_aoebm")
+offset_right = 142.0
+offset_bottom = 90.0
+theme = ExtResource("3_bn7wm")
 theme_override_colors/default_color = Color(0, 0.7251751, 5.7756904e-07, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 30
+fit_content = true
 
-[node name="MoneyLossText" type="RichTextLabel" parent="HUD/MouseFollow" unique_id=1270020279]
+[node name="MoneyLossText" type="RichTextLabel" parent="HUD/MouseFollow" unique_id=1190048270]
 z_index = 100
 layout_mode = 0
 offset_top = 30.0
 offset_right = 114.0
 offset_bottom = 108.0
-theme = ExtResource("3_aoebm")
+theme = ExtResource("3_bn7wm")
 theme_override_colors/default_color = Color(0.8288101, 2.7193873e-06, 5.7756904e-07, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 30
+fit_content = true
 
-[node name="Panel" type="Panel" parent="HUD" unique_id=1991632562]
+[node name="Panel" type="Panel" parent="HUD" unique_id=1948473873]
 visible = false
 layout_mode = 0
 offset_left = -101.0
 offset_top = -50.0
 offset_right = 104.0
 offset_bottom = 47.0
-theme = ExtResource("3_aoebm")
+theme = ExtResource("3_bn7wm")
 
-[node name="ProgressBar" type="ProgressBar" parent="HUD/Panel" unique_id=1651205568]
+[node name="ProgressBar" type="ProgressBar" parent="HUD/Panel" unique_id=1736137026]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.289
@@ -169,9 +180,9 @@ offset_right = -11.0
 offset_bottom = 21.958992
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("3_aoebm")
+theme = ExtResource("3_bn7wm")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HUD/Panel" unique_id=2000405476]
+[node name="RichTextLabel" type="RichTextLabel" parent="HUD/Panel" unique_id=156481542]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -181,7 +192,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "loose chance:"
 
-[node name="Slider" type="HSlider" parent="HUD/Panel" unique_id=1690862131]
+[node name="Slider" type="HSlider" parent="HUD/Panel" unique_id=1474669670]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -191,14 +202,20 @@ offset_top = 7.9629974
 offset_bottom = 35.962997
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("3_aoebm")
-theme_override_icons/grabber = SubResource("ImageTexture_aoebm")
+theme = ExtResource("3_bn7wm")
+theme_override_icons/grabber = SubResource("ImageTexture_txefx")
 
-[node name="InteractionArea" type="Area2D" parent="." unique_id=1192834800]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1188868029]
-shape = SubResource("CircleShape2D_yj5fb")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1816806506]
-stream = ExtResource("4_yj5fb")
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=809031008]
+stream = ExtResource("4_uivuh")
+volume_db = -10.0
 bus = &"SFX"
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=2020297502]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=465712003]
+shape = SubResource("CircleShape2D_8nuxq")
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]
