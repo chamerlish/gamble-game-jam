@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cyek3q0qd06uu" path="res://Resources/Sprites/Machines/slot_machine.png" id="2_3vla0"]
 [ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="3_bn7wm"]
 [ext_resource type="AudioStream" uid="uid://bmipxrjhkj5y3" path="res://Resources/SFX/Machines/slot.wav" id="4_uivuh"]
+[ext_resource type="Texture2D" uid="uid://ny43kpr84s0v" path="res://Resources/Textures/smoke.png" id="5_d27tb"]
 
 [sub_resource type="Animation" id="Animation_8nuxq"]
 length = 0.001
@@ -97,6 +98,32 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8nuxq"]
 radius = 100.49876
+
+[sub_resource type="Gradient" id="Gradient_bn7wm"]
+offsets = PackedFloat32Array(0, 0.4390244, 1)
+colors = PackedColorArray(0.3529412, 0.3529412, 0.3529412, 0.4862745, 0.50980395, 0.50980395, 0.50980395, 0.6, 0.24550089, 0.24550089, 0.24550086, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uivuh"]
+gradient = SubResource("Gradient_bn7wm")
+
+[sub_resource type="Curve" id="Curve_4d68t"]
+_data = [Vector2(0.03363228, 1), 0.0, 0.0, 0, 0, Vector2(0.26681617, 0.47203583), 0.0, 0.0, 0, 0, Vector2(0.78699553, 0.40939605), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_67so2"]
+curve = SubResource("Curve_4d68t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kgw73"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+gravity = Vector3(0, -98, 0)
+scale_min = 0.0
+scale_max = 0.25
+scale_curve = SubResource("CurveTexture_67so2")
+color_ramp = SubResource("GradientTexture1D_uivuh")
+turbulence_enabled = true
+turbulence_noise_scale = 1.828
 
 [node name="Slot Machine" type="StaticBody2D" unique_id=1938691]
 y_sort_enabled = true
@@ -216,6 +243,16 @@ collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=465712003]
 shape = SubResource("CircleShape2D_8nuxq")
+
+[node name="SmokeParticle" type="GPUParticles2D" parent="." unique_id=1355157590]
+z_index = 1000
+position = Vector2(-16, -16)
+emitting = false
+amount = 50
+texture = ExtResource("5_d27tb")
+lifetime = 16.310000000000002
+trail_lifetime = 0.01
+process_material = SubResource("ParticleProcessMaterial_kgw73")
 
 [connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
 [connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]

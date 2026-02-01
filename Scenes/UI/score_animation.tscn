@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://desi5vmqqb22g"]
+
+[ext_resource type="Script" uid="uid://yaecdidqfk81" path="res://Scripts/score_animation.gd" id="1_bplui"]
+[ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="1_ctdq4"]
+[ext_resource type="AudioStream" uid="uid://baexknk7mp0qk" path="res://Resources/SFX/score.wav" id="3_480u1"]
+
+[sub_resource type="Curve" id="Curve_bplui"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.48993295), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_480u1"]
+curve = SubResource("Curve_bplui")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_whoue"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 30.0
+initial_velocity_max = 75.0
+gravity = Vector3(0, 70, 0)
+damping_min = 28.000002
+damping_max = 28.000002
+scale_curve = SubResource("CurveTexture_480u1")
+
+[sub_resource type="Animation" id="Animation_whoue"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MultiplierLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MultiplierLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-63, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_480u1"]
+resource_name = "play multiplier"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MultiplierLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.13333334, 0.53333336, 0.96666664),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MultiplierLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-63, 0), Vector2(-63, 18)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_whoue"]
+_data = {
+&"RESET": SubResource("Animation_whoue"),
+&"play multiplier": SubResource("Animation_480u1")
+}
+
+[node name="ScoreAnimation" type="Node2D" unique_id=2024234427]
+script = ExtResource("1_bplui")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1002243282]
+emitting = false
+amount = 20
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_whoue")
+
+[node name="ScoreLabel" type="RichTextLabel" parent="." unique_id=1810869880]
+z_index = 4090
+texture_filter = 1
+offset_left = -278.0
+offset_top = -20.0
+offset_right = 279.0
+offset_bottom = 20.0
+theme = ExtResource("1_ctdq4")
+theme_override_colors/default_color = Color(0.23496741, 0.818201, 0.9999998, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 40
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=879148951]
+
+[node name="ScoreTextSFX" type="AudioStreamPlayer" parent="." unique_id=651627977]
+stream = ExtResource("3_480u1")
+volume_db = -20.0
+bus = &"ScoreSfx"
+
+[node name="MultiplierLabel" type="RichTextLabel" parent="." unique_id=1496117628]
+z_index = 4096
+offset_left = -63.0
+offset_right = 104.0
+offset_bottom = 40.0
+theme = ExtResource("1_ctdq4")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 30
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2097181769]
+libraries/ = SubResource("AnimationLibrary_whoue")

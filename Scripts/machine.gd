@@ -22,6 +22,7 @@ class_name Machine
 @export var MAX_LEVEL: int = 3
 
 @onready var roll_sfx: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var smoke_fx: GPUParticles2D = $SmokeParticle
 
 # for the panel cuz when you drop it first it counts as drop
 var nums_of_clicks: int 
@@ -104,6 +105,7 @@ func resolve_collisions():
 func place_machine():
 	placed = true
 	available = true
+	Global.scored.emit(100, global_position)
 	
 	resolve_collisions()
 
@@ -130,11 +132,15 @@ func break_machine():
 	broken = true
 	available = false
 	GlobalMachine.available_machine_list.erase(self)
+	smoke_fx.emitting = true
 	update_sprite()
 	
 func fix_machine():
 	broken = false
 	available = true
+	
+	Global.scored.emit(50, global_position)
+	smoke_fx.emitting = false
 	GlobalMachine.available_machine_list.append(self)
 	update_sprite()
 	

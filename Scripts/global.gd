@@ -14,6 +14,8 @@ signal mid_switch_night_state
 signal expand
 signal toolbox_use(value)
 signal event(event_id)
+signal scored(added_score, pos)
+
 signal more_customer_event
 signal inputs_reversed_event
 
@@ -45,6 +47,12 @@ var amount_toolbox: int = 0:
 	set(value):
 		amount_toolbox = value
 		toolbox_use.emit()
+
+var score_multiplier: float = 1:
+	set(value):
+		score_multiplier = value
+		await get_tree().create_timer(20).timeout
+		score_multiplier = 1
 
 var difficulty: int = 1
 var trash_level: int = 0
