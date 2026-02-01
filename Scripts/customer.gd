@@ -179,6 +179,21 @@ func _on_trash_timer_timeout() -> void:
 	$TrashTimer.wait_time = min(base_trash_delay - Global.difficulty, 5)
 	var throw_trash_chance = randi_range(-1, 1)
 	if throw_trash_chance < 10:
-		var trash = trash_scene.instantiate()
-		trash.global_position = global_position
-		get_tree().get_root().add_child(trash)
+		if can_spawn():
+			var trash = trash_scene.instantiate()
+			trash.global_position = global_position
+			get_tree().get_root().add_child(trash)
+
+@onready var trash_area: Area2D = $TrashSpawnPreventArea
+
+func can_spawn() -> bool:
+	var overlapping := trash_area.get_overlapping_areas()
+
+	if overlapping.size() > 0:
+		return false
+		
+	for body in trash_area.get_overlapping_bodies():
+		if body.name == "Door":
+			return false
+	return true
+	

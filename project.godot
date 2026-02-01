@@ -27,6 +27,7 @@ buses/default_bus_layout="uid://cpcfpqgisyh7c"
 
 Global="*res://Scripts/global.gd"
 GlobalMachine="*res://Scripts/global_machine.gd"
+GlobalEvents="*uid://c7nujtnjk5621"
 
 [input]
 

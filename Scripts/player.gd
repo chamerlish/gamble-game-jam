@@ -18,7 +18,13 @@ func expand():
 	position.x += Global.TILE_SIZE.y + Global.GRID_SIZE.y / 4
 	position.y += Global.TILE_SIZE.x + Global.GRID_SIZE.y / 4
 
+var input_inversed: bool
+
+func input_reverse():
+	input_inversed = true
+
 func _ready() -> void:
+	Global.inputs_reversed_event.connect(input_reverse)
 	Global.expand.connect(expand)
 	Global.player_node = self
 	GlobalMachine.selected_machine_changed.connect(pick_machine)
@@ -94,6 +100,8 @@ func _physics_process(delta: float) -> void:
 		Input.get_axis("move_up", "move_down")
 	)
 
+	if input_inversed:
+		input_dir *= -1
 
 	
 	if not Global.night:

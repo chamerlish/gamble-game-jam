@@ -3,12 +3,14 @@ extends Node
 signal selected_machine_changed(machine_id: int)
 
 var machine_list: Array[PackedScene] = [
+	preload("res://Scenes/Machines/slot.tscn"),
+	preload("res://Scenes/Machines/roulette.tscn"),
 	preload("res://Scenes/Machines/blackjack.tscn"),
-	preload("res://Scenes/Machines/machine2.tscn"),
-	preload("res://Scenes/Machines/machine3.tscn")
+	preload("res://Scenes/Machines/poker.tscn"),
 ]
 
 var customer_scene: PackedScene = preload("res://Scenes/customer.tscn")
+const TRASH_SCENE: PackedScene = preload("res://Scenes/trash.tscn")
 
 var entity_list: Array[Node2D]
 

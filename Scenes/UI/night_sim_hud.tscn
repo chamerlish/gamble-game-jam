@@ -2,11 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://bnb3o1vl7dq6r" path="res://Scenes/Machines/machine_selection_button.tscn" id="1_0vmel"]
 [ext_resource type="PackedScene" uid="uid://bvwld5wtd4em6" path="res://Scenes/Machines/blackjack.tscn" id="2_8gasv"]
+[ext_resource type="PackedScene" uid="uid://bo8u0vt3tkk8i" path="res://Scenes/Machines/slot.tscn" id="2_brysk"]
 [ext_resource type="Texture2D" uid="uid://7hmk1agh6my2" path="res://icon.svg" id="2_tbp50"]
-[ext_resource type="PackedScene" uid="uid://bx8jjvuqessli" path="res://Scenes/Machines/machine1.tscn" id="3_36ysh"]
+[ext_resource type="PackedScene" uid="uid://c2pltg1jtvef7" path="res://Scenes/Machines/roulette.tscn" id="3_dqm80"]
 [ext_resource type="Script" uid="uid://04xk0h152j75" path="res://Scenes/UI/upgrade_button.gd" id="3_hu0pb"]
-[ext_resource type="PackedScene" uid="uid://c1ejq1xu677pa" path="res://Scenes/Machines/machine2.tscn" id="4_36ysh"]
 [ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="4_ym3bv"]
+[ext_resource type="PackedScene" uid="uid://bxp7hybdmrh1u" path="res://Scenes/Machines/poker.tscn" id="5_1agm1"]
 [ext_resource type="AudioStream" uid="uid://bl7rvwdlofqdb" path="res://Resources/SFX/upgrade1.wav" id="5_hw2ke"]
 
 [node name="NightSimHUD" type="Control" unique_id=1582504801]
@@ -34,18 +35,24 @@ offset_bottom = -50.0
 layout_mode = 2
 mouse_filter = 1
 machine_id = 0
-machine_scene = ExtResource("2_8gasv")
+machine_scene = ExtResource("2_brysk")
 
 [node name="MachineSelectionButton2" parent="MachinePlace" unique_id=1514242693 instance=ExtResource("1_0vmel")]
 layout_mode = 2
 mouse_filter = 1
-machine_scene = ExtResource("3_36ysh")
+machine_scene = ExtResource("3_dqm80")
 
 [node name="MachineSelectionButton3" parent="MachinePlace" unique_id=1605467303 instance=ExtResource("1_0vmel")]
 layout_mode = 2
 mouse_filter = 1
 machine_id = 2
-machine_scene = ExtResource("4_36ysh")
+machine_scene = ExtResource("2_8gasv")
+
+[node name="MachineSelectionButton4" parent="MachinePlace" unique_id=639037972 instance=ExtResource("1_0vmel")]
+layout_mode = 2
+mouse_filter = 1
+machine_id = 3
+machine_scene = ExtResource("5_1agm1")
 
 [node name="CasinoUpgrade" type="VBoxContainer" parent="." unique_id=1154626568]
 layout_mode = 1
