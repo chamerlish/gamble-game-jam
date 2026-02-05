@@ -145,11 +145,7 @@ func _on_interraction_collider_body_entered(body: Node2D) -> void:
 func _on_playing_timer_timeout() -> void:
 	# Finished playing
 	
-	var chance_of_winning:= randf_range(0, 255)
-	if chance_of_winning == 255:
-		machine_in_use.loose_money(1000)
-	else:
-		machine_in_use.win_money(25)
+	Global.win_money.emit(machine_in_use.prize_money, machine_in_use.global_position)
 	
 	var chance_of_breaking:= randi_range(0, 10)
 	if chance_of_breaking > 8 - min(3, Global.difficulty- 1):

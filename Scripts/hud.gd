@@ -21,7 +21,3 @@ func make_event(event_id: int):
 	var event_node = EVENT_SCENE.instantiate()
 	add_child(event_node)
 	event_node.start(event_id)
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		Global.event.emit(2)

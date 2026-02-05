@@ -3,96 +3,9 @@
 [ext_resource type="Script" uid="uid://v6vl0cvw2mn1" path="res://Scripts/machine.gd" id="1_3vla0"]
 [ext_resource type="Texture2D" uid="uid://cyek3q0qd06uu" path="res://Resources/Sprites/Machines/slot_machine.png" id="2_3vla0"]
 [ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="3_bn7wm"]
+[ext_resource type="PackedScene" uid="uid://bfwjlai7tl1sg" path="res://Scenes/UI/money_loss_gain.tscn" id="3_uivuh"]
 [ext_resource type="AudioStream" uid="uid://bmipxrjhkj5y3" path="res://Resources/SFX/Machines/slot.wav" id="4_uivuh"]
 [ext_resource type="Texture2D" uid="uid://ny43kpr84s0v" path="res://Resources/Textures/smoke.png" id="5_d27tb"]
-
-[sub_resource type="Animation" id="Animation_8nuxq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../HUD/MouseFollow/MoneyLossText:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../HUD/MouseFollow/MoneyLossText:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 30)]
-}
-
-[sub_resource type="Animation" id="Animation_86igg"]
-resource_name = "money_gain"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../HUD/MouseFollow/MoneyGainText:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.01, 0.27666667, 0.57666665, 0.8433333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../HUD/MouseFollow/MoneyGainText:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -40)]
-}
-
-[sub_resource type="Animation" id="Animation_txefx"]
-resource_name = "money_loss"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../HUD/MouseFollow/MoneyLossText:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.26666668, 0.56666666, 0.8333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../HUD/MouseFollow/MoneyLossText:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 40)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8nuxq"]
-_data = {
-&"RESET": SubResource("Animation_8nuxq"),
-&"money_gain": SubResource("Animation_86igg"),
-&"money_loss": SubResource("Animation_txefx")
-}
 
 [sub_resource type="ImageTexture" id="ImageTexture_txefx"]
 
@@ -128,6 +41,7 @@ turbulence_noise_scale = 1.828
 [node name="Slot Machine" type="StaticBody2D" unique_id=1938691]
 y_sort_enabled = true
 script = ExtResource("1_3vla0")
+prize_money = 25
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=623247675]
 texture_filter = 1
@@ -144,47 +58,14 @@ polygon = PackedVector2Array(-4.196293e-06, 24, -56.000008, 47.99999, -1.3987645
 y_sort_enabled = true
 polygon = PackedVector2Array(0, 24, -56, 48, 0, 80, 56, 48)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1542537907]
-root_node = NodePath("../LeftRightCollision")
-libraries/ = SubResource("AnimationLibrary_8nuxq")
-
 [node name="HUD" type="Control" parent="." unique_id=1136325813]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="MouseFollow" type="Control" parent="HUD" unique_id=400267832]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="MoneyGainText" type="RichTextLabel" parent="HUD/MouseFollow" unique_id=1245316273]
-visible = false
-modulate = Color(1, 1, 1, 0)
-z_index = 100
+[node name="MoneyLossGain" parent="HUD" unique_id=399644331 instance=ExtResource("3_uivuh")]
 layout_mode = 0
-offset_right = 142.0
-offset_bottom = 90.0
-theme = ExtResource("3_bn7wm")
-theme_override_colors/default_color = Color(0, 0.7251751, 5.7756904e-07, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/normal_font_size = 30
-fit_content = true
-
-[node name="MoneyLossText" type="RichTextLabel" parent="HUD/MouseFollow" unique_id=1190048270]
-z_index = 100
-layout_mode = 0
-offset_top = 30.0
-offset_right = 114.0
-offset_bottom = 108.0
-theme = ExtResource("3_bn7wm")
-theme_override_colors/default_color = Color(0.8288101, 2.7193873e-06, 5.7756904e-07, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/normal_font_size = 30
-fit_content = true
 
 [node name="Panel" type="Panel" parent="HUD" unique_id=1948473873]
 visible = false
@@ -238,8 +119,8 @@ volume_db = -10.0
 bus = &"SFX"
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=2020297502]
-collision_layer = 15
-collision_mask = 15
+collision_layer = 13
+collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=465712003]
 shape = SubResource("CircleShape2D_8nuxq")
@@ -253,6 +134,19 @@ texture = ExtResource("5_d27tb")
 lifetime = 16.310000000000002
 trail_lifetime = 0.01
 process_material = SubResource("ParticleProcessMaterial_kgw73")
+
+[node name="OverlappingArea" type="Area2D" parent="." unique_id=787085158]
+collision_layer = 2
+collision_mask = 2
+
+[node name="LeftRightCollision" type="CollisionPolygon2D" parent="OverlappingArea" unique_id=632281064]
+y_sort_enabled = true
+rotation = -6.2831855
+polygon = PackedVector2Array(-4.196293e-06, 24, -56.000008, 47.99999, -1.3987645e-05, 80, 55.999992, 48.00001)
+
+[node name="UpDownCollision" type="CollisionPolygon2D" parent="OverlappingArea" unique_id=1140493922]
+y_sort_enabled = true
+polygon = PackedVector2Array(0, 24, -56, 48, 0, 80, 56, 48)
 
 [connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
 [connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]

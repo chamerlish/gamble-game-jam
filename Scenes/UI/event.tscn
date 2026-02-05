@@ -5,13 +5,19 @@
 [ext_resource type="Texture2D" uid="uid://bgk3r72u8bk3a" path="res://Resources/Sprites/Event/event sprite2.png" id="2_0fxkr"]
 [ext_resource type="Texture2D" uid="uid://21vtfua6frdj" path="res://Resources/Sprites/Event/event sprite3.png" id="3_fx1wj"]
 [ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="5_xtwwj"]
+[ext_resource type="Script" uid="uid://bml0gwvj3kfsd" path="res://Scenes/UI/special_timer_sprite.gd" id="6_8k7n6"]
+[ext_resource type="Texture2D" uid="uid://f63gq24oco4g" path="res://Resources/Textures/clock-Sheet.png" id="7_he7al"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eoliq"]
+atlas = ExtResource("7_he7al")
+region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="Animation" id="Animation_0fxkr"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Layer1:scale")
+tracks/0/path = NodePath("UI/Layer1:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -23,7 +29,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnnouncementLabel:offset_top")
+tracks/1/path = NodePath("UI/AnnouncementLabel:offset_top")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -35,7 +41,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("EventLabel:visible_ratio")
+tracks/2/path = NodePath("UI/EventLabel:visible_ratio")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -51,7 +57,7 @@ length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Layer1:scale")
+tracks/0/path = NodePath("UI/Layer1:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -63,7 +69,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Layer2:scale")
+tracks/1/path = NodePath("UI/Layer2:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -75,7 +81,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Layer3:scale")
+tracks/2/path = NodePath("UI/Layer3:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -87,7 +93,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnnouncementLabel:offset_top")
+tracks/3/path = NodePath("UI/AnnouncementLabel:offset_top")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -99,7 +105,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("EventLabel:visible_ratio")
+tracks/4/path = NodePath("UI/EventLabel:visible_ratio")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -115,14 +121,11 @@ tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(3.3666666, 3.4333334),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(3.6666667),
+"transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"throw_back_global"
-}, {
-"args": [],
-"method": &"queue_free"
 }]
 }
 
@@ -133,15 +136,19 @@ _data = {
 }
 
 [node name="Event" type="Control" unique_id=1860841783]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_fx1wj")
 
-[node name="Panel" type="Panel" parent="." unique_id=893693479]
+[node name="EffectTimer" type="Timer" parent="." unique_id=1380807179]
+
+[node name="UI" type="Control" parent="." unique_id=32400626]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -149,7 +156,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Layer1" type="TextureRect" parent="." unique_id=2007273524]
+[node name="Panel" type="Panel" parent="UI" unique_id=893693479]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Layer1" type="TextureRect" parent="UI" unique_id=2007273524]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -164,34 +179,39 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("1_s7xhn")
 
-[node name="Layer2" type="TextureRect" parent="." unique_id=341733696]
+[node name="Layer2" type="TextureRect" parent="UI" unique_id=341733696]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -36.0
+offset_right = 64.0
+offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1e-05, 1e-05)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("2_0fxkr")
 
-[node name="Layer3" type="TextureRect" parent="." unique_id=1100138647]
+[node name="Layer3" type="TextureRect" parent="UI" unique_id=1100138647]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -36.0
+offset_right = 64.0
+offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1e-05, 1e-05)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("3_fx1wj")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1952577844]
-libraries/ = SubResource("AnimationLibrary_xtwwj")
-
-[node name="AnnouncementLabel" type="RichTextLabel" parent="." unique_id=419763970]
+[node name="AnnouncementLabel" type="RichTextLabel" parent="UI" unique_id=419763970]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
@@ -210,12 +230,14 @@ text = "SPECIAL EVENT!!!!"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="EventLabel" type="RichTextLabel" parent="." unique_id=880408473]
+[node name="EventLabel" type="RichTextLabel" parent="UI" unique_id=880408473]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
+offset_top = -15.0
+offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_xtwwj")
@@ -227,3 +249,31 @@ text = "errrrrrrrrrr"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SpecialTimerSprite" type="CanvasLayer" parent="." unique_id=948487369]
+layer = 8
+script = ExtResource("6_8k7n6")
+
+[node name="Control" type="Control" parent="SpecialTimerSprite" unique_id=342840732]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite" type="TextureRect" parent="SpecialTimerSprite/Control" unique_id=1322327719]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -128.0
+offset_right = 128.0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_eoliq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1952577844]
+libraries/ = SubResource("AnimationLibrary_xtwwj")
+
+[connection signal="timeout" from="EffectTimer" to="." method="_on_effect_timer_timeout"]

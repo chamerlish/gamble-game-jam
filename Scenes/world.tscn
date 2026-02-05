@@ -9,12 +9,18 @@
 [ext_resource type="Script" uid="uid://d0lew6oo35dk7" path="res://Scripts/toolbox_indecator.gd" id="9_0pcbe"]
 [ext_resource type="Shader" uid="uid://f3sp32cviu0" path="res://Scenes/world.gdshader" id="10_0fj1v"]
 [ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="10_axeuq"]
+[ext_resource type="PackedScene" uid="uid://b3jhhdhkfidhc" path="res://Scenes/UI/money_and_score.tscn" id="10_hgpy0"]
 [ext_resource type="PackedScene" uid="uid://cgu38iml7a5lr" path="res://Scenes/door.tscn" id="10_ikia7"]
 [ext_resource type="Script" uid="uid://diitvq7xtv5si" path="res://Scripts/walls.gd" id="11_7yui6"]
 [ext_resource type="PackedScene" uid="uid://bh0an1bffan6f" path="res://Scenes/Toolbox.tscn" id="11_c5t2i"]
 [ext_resource type="PackedScene" uid="uid://cvh4be0iakbb8" path="res://Scenes/player.tscn" id="11_ikia7"]
+[ext_resource type="PackedScene" uid="uid://bfwjlai7tl1sg" path="res://Scenes/UI/money_loss_gain.tscn" id="11_t2t4p"]
 [ext_resource type="PackedScene" uid="uid://by85xii2v4q2a" path="res://Scenes/counter.tscn" id="12_7yui6"]
+[ext_resource type="PackedScene" uid="uid://56ehtbp4uwfn" path="res://Scenes/UI/low_health_indecator.tscn" id="12_yq1aw"]
 [ext_resource type="PackedScene" uid="uid://0dwle8arroug" path="res://Scenes/building_mode.tscn" id="13_c5t2i"]
+[ext_resource type="Script" uid="uid://cprrgij3wt2lc" path="res://Scripts/rent_money.gd" id="18_0pcbe"]
+[ext_resource type="PackedScene" uid="uid://bw4bmtg860o24" path="res://Scenes/UI/special_timer_sprite.tscn" id="19_axeuq"]
+[ext_resource type="AudioStream" uid="uid://b22pyg8x45gjg" path="res://Resources/Music/main theme.wav" id="20_1cojt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5v1tr"]
 texture = ExtResource("3_5ukr8")
@@ -105,6 +111,11 @@ theme = ExtResource("10_axeuq")
 theme_override_constants/shadow_outline_size = 10
 theme_override_constants/outline_size = 10
 
+[node name="MoneyAndScore" parent="HUD" unique_id=2038700856 instance=ExtResource("10_hgpy0")]
+
+[node name="MoneyLossGain" parent="HUD" unique_id=399644331 instance=ExtResource("11_t2t4p")]
+visible = false
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1707965239]
 layer = -1
 
@@ -168,3 +179,22 @@ position = Vector2(432, -342)
 position = Vector2(440, 192)
 
 [node name="BuildingMode" parent="." unique_id=1984526871 instance=ExtResource("13_c5t2i")]
+
+[node name="RentMoney" type="Timer" parent="." unique_id=1218800309]
+wait_time = 15.0
+autostart = true
+script = ExtResource("18_0pcbe")
+
+[node name="SpecialTimerSprite" parent="RentMoney" unique_id=1459655327 instance=ExtResource("19_axeuq")]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=309580044]
+stream = ExtResource("20_1cojt")
+autoplay = true
+bus = &"Music"
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1406463837]
+layer = 24
+
+[node name="LowHealthIndecator" parent="CanvasLayer2" unique_id=1583154669 instance=ExtResource("12_yq1aw")]
+
+[connection signal="timeout" from="RentMoney" to="RentMoney" method="_on_timeout"]

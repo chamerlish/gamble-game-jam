@@ -8,13 +8,12 @@ const SHAKE_FADE: float = 10.0
 
 func _ready() -> void:
 	$PriceLabel.text = str(get_price()) + "$"
-	Global.amount_money = 10000
 
 func _on_pressed() -> void:
 	if Global.amount_money > 0:
 		Global.expand.emit()
 		Global.scored.emit(1000, Global.player_node.global_position)
-		Global.loose_money(get_price())
+		Global.loose_money.emit(get_price(), global_position)
 		level += 1
 		$PriceLabel.text = str(get_price()) + "$"
 		$AudioStreamPlayer.play()

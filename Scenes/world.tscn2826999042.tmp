@@ -1,0 +1,188 @@
+[gd_scene format=4 uid="uid://drr7hq8vxf7td"]
+
+[ext_resource type="Script" uid="uid://k386x5vabvka" path="res://Scripts/tile_map.gd" id="1_7yui6"]
+[ext_resource type="Texture2D" uid="uid://56r8p83th7w7" path="res://test_tileset.png" id="3_5ukr8"]
+[ext_resource type="Script" uid="uid://bb443gcahs5cc" path="res://Scripts/player_camera.gd" id="5_5v1tr"]
+[ext_resource type="PackedScene" uid="uid://lx7i37jmv8dj" path="res://Scenes/UI/night_sim_hud.tscn" id="5_fo5ed"]
+[ext_resource type="Script" uid="uid://cxwd6ervjdlqw" path="res://Scripts/hud.gd" id="5_k7acu"]
+[ext_resource type="Script" uid="uid://b1h0f1u4onopf" path="res://Scenes/UI/night_sim_hud.gd" id="6_5ukr8"]
+[ext_resource type="Script" uid="uid://d0lew6oo35dk7" path="res://Scripts/toolbox_indecator.gd" id="9_0pcbe"]
+[ext_resource type="Shader" uid="uid://f3sp32cviu0" path="res://Scenes/world.gdshader" id="10_0fj1v"]
+[ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="10_axeuq"]
+[ext_resource type="PackedScene" uid="uid://b3jhhdhkfidhc" path="res://Scenes/UI/money_and_score.tscn" id="10_hgpy0"]
+[ext_resource type="PackedScene" uid="uid://cgu38iml7a5lr" path="res://Scenes/door.tscn" id="10_ikia7"]
+[ext_resource type="Script" uid="uid://diitvq7xtv5si" path="res://Scripts/walls.gd" id="11_7yui6"]
+[ext_resource type="PackedScene" uid="uid://bh0an1bffan6f" path="res://Scenes/Toolbox.tscn" id="11_c5t2i"]
+[ext_resource type="PackedScene" uid="uid://cvh4be0iakbb8" path="res://Scenes/player.tscn" id="11_ikia7"]
+[ext_resource type="PackedScene" uid="uid://bfwjlai7tl1sg" path="res://Scenes/UI/money_loss_gain.tscn" id="11_t2t4p"]
+[ext_resource type="PackedScene" uid="uid://by85xii2v4q2a" path="res://Scenes/counter.tscn" id="12_7yui6"]
+[ext_resource type="PackedScene" uid="uid://0dwle8arroug" path="res://Scenes/building_mode.tscn" id="13_c5t2i"]
+[ext_resource type="Script" uid="uid://cprrgij3wt2lc" path="res://Scripts/rent_money.gd" id="18_0pcbe"]
+[ext_resource type="PackedScene" uid="uid://bw4bmtg860o24" path="res://Scenes/UI/special_timer_sprite.tscn" id="19_axeuq"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5v1tr"]
+texture = ExtResource("3_5ukr8")
+texture_region_size = Vector2i(112, 128)
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_5v1tr"]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(112, 64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_5v1tr")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hgpy0"]
+load_path = "res://.godot/imported/toolbox.png-67130796423891fefaa9b0f499195f22.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ikia7"]
+shader = ExtResource("10_0fj1v")
+shader_parameter/horizontalMovement = 0.1
+shader_parameter/verticalMovement = 0.1
+shader_parameter/frequencyStar = 0.1
+shader_parameter/sizeStar = 100.0
+shader_parameter/brightnessStar = 3.0
+shader_parameter/shineFrequencyStar = 10.0
+shader_parameter/transparencyStar = 0.0
+shader_parameter/starIterations = 3
+shader_parameter/frequencyBgStar = 0.996
+shader_parameter/shineFrequencyBgStar = 1.0
+shader_parameter/transparencyBgStar = 0.0
+shader_parameter/colorBackground = Color(0.05, 0.04, 0.2, 1)
+shader_parameter/transparencyBackground = 0.0
+shader_parameter/seed = 0.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7yui6"]
+normal = Vector2(-0.503851, 0.8637906)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kn0ld"]
+normal = Vector2(-0.49972245, 0.86618555)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e0ngr"]
+normal = Vector2(0.49613893, -0.86824316)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_c5t2i"]
+normal = Vector2(0.5069555, -0.8619722)
+
+[node name="World" type="Node2D" unique_id=1724012538]
+metadata/_edit_horizontal_guides_ = [832.0]
+
+[node name="TileMap" type="Node2D" parent="." unique_id=1446174342]
+y_sort_enabled = true
+script = ExtResource("1_7yui6")
+
+[node name="TileSet" type="TileMapLayer" parent="TileMap" unique_id=1251975554]
+z_index = -1
+texture_filter = 1
+tile_map_data = PackedByteArray("AAD2//b/AAABAAAAAAD2//f/AAABAAAAAAD2//j/AAABAAAAAAD2//n/AAABAAAAAAD2//r/AAABAAAAAAD2//v/AAABAAAAAAD2//z/AAABAAAAAAD2//3/AAABAAAAAAD2//7/AAABAAAAAAD2////AAABAAAAAAD2/wAAAAABAAAAAAD2/wEAAAABAAAAAAD2/wIAAAABAAAAAAD2/wMAAAABAAAAAAD2/wQAAAABAAAAAAD2/wUAAAABAAAAAAD2/wYAAAABAAAAAAD2/wcAAAABAAAAAAD2/wgAAAABAAAAAAD2/wkAAAABAAAAAAD3//b/AAABAAAAAAD3//f/AAABAAAAAAD3//j/AAABAAAAAAD3//n/AAABAAAAAAD3//r/AAABAAAAAAD3//v/AAABAAAAAAD3//z/AAABAAAAAAD3//3/AAABAAAAAAD3//7/AAABAAAAAAD3////AAABAAAAAAD3/wAAAAABAAAAAAD3/wEAAAABAAAAAAD3/wIAAAABAAAAAAD3/wMAAAABAAAAAAD3/wQAAAABAAAAAAD3/wUAAAABAAAAAAD3/wYAAAABAAAAAAD3/wcAAAABAAAAAAD3/wgAAAABAAAAAAD3/wkAAAABAAAAAAD4//b/AAABAAAAAAD4//f/AAABAAAAAAD4//j/AAABAAAAAAD4//n/AAABAAAAAAD4//r/AAABAAAAAAD4//v/AAABAAAAAAD4//z/AAABAAAAAAD4//3/AAABAAAAAAD4//7/AAABAAAAAAD4////AAABAAAAAAD4/wAAAAABAAAAAAD4/wEAAAABAAAAAAD4/wIAAAABAAAAAAD4/wMAAAABAAAAAAD4/wQAAAABAAAAAAD4/wUAAAABAAAAAAD4/wYAAAABAAAAAAD4/wcAAAABAAAAAAD4/wgAAAABAAAAAAD4/wkAAAABAAAAAAD5//b/AAABAAAAAAD5//f/AAABAAAAAAD5//j/AAABAAAAAAD5//n/AAABAAAAAAD5//r/AAABAAAAAAD5//v/AAABAAAAAAD5//z/AAABAAAAAAD5//3/AAABAAAAAAD5//7/AAABAAAAAAD5////AAABAAAAAAD5/wAAAAABAAAAAAD5/wEAAAABAAAAAAD5/wIAAAABAAAAAAD5/wMAAAABAAAAAAD5/wQAAAABAAAAAAD5/wUAAAABAAAAAAD5/wYAAAABAAAAAAD5/wcAAAABAAAAAAD5/wgAAAABAAAAAAD5/wkAAAABAAAAAAD6//b/AAABAAAAAAD6//f/AAABAAAAAAD6//j/AAABAAAAAAD6//n/AAABAAAAAAD6//r/AAABAAAAAAD6//v/AAABAAAAAAD6//z/AAABAAAAAAD6//3/AAABAAAAAAD6//7/AAABAAAAAAD6////AAABAAAAAAD6/wAAAAABAAAAAAD6/wEAAAABAAAAAAD6/wIAAAABAAAAAAD6/wMAAAABAAAAAAD6/wQAAAABAAAAAAD6/wUAAAABAAAAAAD6/wYAAAABAAAAAAD6/wcAAAABAAAAAAD6/wgAAAABAAAAAAD6/wkAAAABAAAAAAD7//b/AAABAAAAAAD7//f/AAABAAAAAAD7//j/AAABAAAAAAD7//n/AAABAAAAAAD7//r/AAABAAAAAAD7//v/AAABAAAAAAD7//z/AAABAAAAAAD7//3/AAABAAAAAAD7//7/AAABAAAAAAD7////AAABAAAAAAD7/wAAAAABAAAAAAD7/wEAAAABAAAAAAD7/wIAAAABAAAAAAD7/wMAAAABAAAAAAD7/wQAAAABAAAAAAD7/wUAAAABAAAAAAD7/wYAAAABAAAAAAD7/wcAAAABAAAAAAD7/wgAAAABAAAAAAD7/wkAAAABAAAAAAD8//b/AAABAAAAAAD8//f/AAABAAAAAAD8//j/AAABAAAAAAD8//n/AAABAAAAAAD8//r/AAABAAAAAAD8//v/AAABAAAAAAD8//z/AAABAAAAAAD8//3/AAABAAAAAAD8//7/AAABAAAAAAD8////AAABAAAAAAD8/wAAAAABAAAAAAD8/wEAAAABAAAAAAD8/wIAAAABAAAAAAD8/wMAAAABAAAAAAD8/wQAAAABAAAAAAD8/wUAAAABAAAAAAD8/wYAAAABAAAAAAD8/wcAAAABAAAAAAD8/wgAAAABAAAAAAD8/wkAAAABAAAAAAD9//b/AAABAAAAAAD9//f/AAABAAAAAAD9//j/AAABAAAAAAD9//n/AAABAAAAAAD9//r/AAABAAAAAAD9//v/AAABAAAAAAD9//z/AAABAAAAAAD9//3/AAABAAAAAAD9//7/AAABAAAAAAD9////AAABAAAAAAD9/wAAAAABAAAAAAD9/wEAAAABAAAAAAD9/wIAAAABAAAAAAD9/wMAAAABAAAAAAD9/wQAAAABAAAAAAD9/wUAAAABAAAAAAD9/wYAAAABAAAAAAD9/wcAAAABAAAAAAD9/wgAAAABAAAAAAD9/wkAAAABAAAAAAD+//b/AAABAAAAAAD+//f/AAABAAAAAAD+//j/AAABAAAAAAD+//n/AAABAAAAAAD+//r/AAABAAAAAAD+//v/AAABAAAAAAD+//z/AAABAAAAAAD+//3/AAABAAAAAAD+//7/AAABAAAAAAD+////AAABAAAAAAD+/wAAAAABAAAAAAD+/wEAAAABAAAAAAD+/wIAAAABAAAAAAD+/wMAAAABAAAAAAD+/wQAAAABAAAAAAD+/wUAAAABAAAAAAD+/wYAAAABAAAAAAD+/wcAAAABAAAAAAD+/wgAAAABAAAAAAD+/wkAAAABAAAAAAD///b/AAABAAAAAAD///f/AAABAAAAAAD///j/AAABAAAAAAD///n/AAABAAAAAAD///r/AAABAAAAAAD///v/AAABAAAAAAD///z/AAABAAAAAAD///3/AAABAAAAAAD///7/AAABAAAAAAD/////AAABAAAAAAD//wAAAAABAAAAAAD//wEAAAABAAAAAAD//wIAAAABAAAAAAD//wMAAAABAAAAAAD//wQAAAABAAAAAAD//wUAAAABAAAAAAD//wYAAAABAAAAAAD//wcAAAABAAAAAAD//wgAAAABAAAAAAD//wkAAAABAAAAAAAAAPb/AAABAAAAAAAAAPf/AAABAAAAAAAAAPj/AAABAAAAAAAAAPn/AAABAAAAAAAAAPr/AAABAAAAAAAAAPv/AAABAAAAAAAAAPz/AAABAAAAAAAAAP3/AAABAAAAAAAAAP7/AAABAAAAAAAAAP//AAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAIAAAABAAAAAAAAAAMAAAABAAAAAAAAAAQAAAABAAAAAAAAAAUAAAABAAAAAAAAAAYAAAABAAAAAAAAAAcAAAABAAAAAAAAAAgAAAABAAAAAAAAAAkAAAABAAAAAAABAPb/AAABAAAAAAABAPf/AAABAAAAAAABAPj/AAABAAAAAAABAPn/AAABAAAAAAABAPr/AAABAAAAAAABAPv/AAABAAAAAAABAPz/AAABAAAAAAABAP3/AAABAAAAAAABAP7/AAABAAAAAAABAP//AAABAAAAAAABAAAAAAABAAAAAAABAAEAAAABAAAAAAABAAIAAAABAAAAAAABAAMAAAABAAAAAAABAAQAAAABAAAAAAABAAUAAAABAAAAAAABAAYAAAABAAAAAAABAAcAAAABAAAAAAABAAgAAAABAAAAAAABAAkAAAABAAAAAAACAPb/AAABAAAAAAACAPf/AAABAAAAAAACAPj/AAABAAAAAAACAPn/AAABAAAAAAACAPr/AAABAAAAAAACAPv/AAABAAAAAAACAPz/AAABAAAAAAACAP3/AAABAAAAAAACAP7/AAABAAAAAAACAP//AAABAAAAAAACAAAAAAABAAAAAAACAAEAAAABAAAAAAACAAIAAAABAAAAAAACAAMAAAABAAAAAAACAAQAAAABAAAAAAACAAUAAAABAAAAAAACAAYAAAABAAAAAAACAAcAAAABAAAAAAACAAgAAAABAAAAAAACAAkAAAABAAAAAAADAPb/AAABAAAAAAADAPf/AAABAAAAAAADAPj/AAABAAAAAAADAPn/AAABAAAAAAADAPr/AAABAAAAAAADAPv/AAABAAAAAAADAPz/AAABAAAAAAADAP3/AAABAAAAAAADAP7/AAABAAAAAAADAP//AAABAAAAAAADAAAAAAABAAAAAAADAAEAAAABAAAAAAADAAIAAAABAAAAAAADAAMAAAABAAAAAAADAAQAAAABAAAAAAADAAUAAAABAAAAAAADAAYAAAABAAAAAAADAAcAAAABAAAAAAADAAgAAAABAAAAAAADAAkAAAABAAAAAAAEAPb/AAABAAAAAAAEAPf/AAABAAAAAAAEAPj/AAABAAAAAAAEAPn/AAABAAAAAAAEAPr/AAABAAAAAAAEAPv/AAABAAAAAAAEAPz/AAABAAAAAAAEAP3/AAABAAAAAAAEAP7/AAABAAAAAAAEAP//AAABAAAAAAAEAAAAAAABAAAAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAEAAQAAAABAAAAAAAEAAUAAAABAAAAAAAEAAYAAAABAAAAAAAEAAcAAAABAAAAAAAEAAgAAAABAAAAAAAEAAkAAAABAAAAAAAFAPb/AAABAAAAAAAFAPf/AAABAAAAAAAFAPj/AAABAAAAAAAFAPn/AAABAAAAAAAFAPr/AAABAAAAAAAFAPv/AAABAAAAAAAFAPz/AAABAAAAAAAFAP3/AAABAAAAAAAFAP7/AAABAAAAAAAFAP//AAABAAAAAAAFAAAAAAABAAAAAAAFAAEAAAABAAAAAAAFAAIAAAABAAAAAAAFAAMAAAABAAAAAAAFAAQAAAABAAAAAAAFAAUAAAABAAAAAAAFAAYAAAABAAAAAAAFAAcAAAABAAAAAAAFAAgAAAABAAAAAAAFAAkAAAABAAAAAAAGAPb/AAABAAAAAAAGAPf/AAABAAAAAAAGAPj/AAABAAAAAAAGAPn/AAABAAAAAAAGAPr/AAABAAAAAAAGAPv/AAABAAAAAAAGAPz/AAABAAAAAAAGAP3/AAABAAAAAAAGAP7/AAABAAAAAAAGAP//AAABAAAAAAAGAAAAAAABAAAAAAAGAAEAAAABAAAAAAAGAAIAAAABAAAAAAAGAAMAAAABAAAAAAAGAAQAAAABAAAAAAAGAAUAAAABAAAAAAAGAAYAAAABAAAAAAAGAAcAAAABAAAAAAAGAAgAAAABAAAAAAAGAAkAAAABAAAAAAAHAPb/AAABAAAAAAAHAPf/AAABAAAAAAAHAPj/AAABAAAAAAAHAPn/AAABAAAAAAAHAPr/AAABAAAAAAAHAPv/AAABAAAAAAAHAPz/AAABAAAAAAAHAP3/AAABAAAAAAAHAP7/AAABAAAAAAAHAP//AAABAAAAAAAHAAAAAAABAAAAAAAHAAEAAAABAAAAAAAHAAIAAAABAAAAAAAHAAMAAAABAAAAAAAHAAQAAAABAAAAAAAHAAUAAAABAAAAAAAHAAYAAAABAAAAAAAHAAcAAAABAAAAAAAHAAgAAAABAAAAAAAHAAkAAAABAAAAAAAIAPb/AAABAAAAAAAIAPf/AAABAAAAAAAIAPj/AAABAAAAAAAIAPn/AAABAAAAAAAIAPr/AAABAAAAAAAIAPv/AAABAAAAAAAIAPz/AAABAAAAAAAIAP3/AAABAAAAAAAIAP7/AAABAAAAAAAIAP//AAABAAAAAAAIAAAAAAABAAAAAAAIAAEAAAABAAAAAAAIAAIAAAABAAAAAAAIAAMAAAABAAAAAAAIAAQAAAABAAAAAAAIAAUAAAABAAAAAAAIAAYAAAABAAAAAAAIAAcAAAABAAAAAAAIAAgAAAABAAAAAAAIAAkAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_5v1tr")
+
+[node name="Player" parent="." unique_id=1672057571 instance=ExtResource("11_ikia7")]
+z_index = 1
+
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=1089541567]
+script = ExtResource("5_5v1tr")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=723625578]
+script = ExtResource("5_k7acu")
+
+[node name="NightSimHUD" parent="HUD" unique_id=2080593569 instance=ExtResource("5_fo5ed")]
+script = ExtResource("6_5ukr8")
+
+[node name="ToolboxIndecator" type="TextureRect" parent="HUD" unique_id=2081978153]
+texture = SubResource("CompressedTexture2D_hgpy0")
+script = ExtResource("9_0pcbe")
+
+[node name="AmountLabel" type="RichTextLabel" parent="HUD/ToolboxIndecator" unique_id=244424207]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -53.0
+offset_top = -17.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("10_axeuq")
+theme_override_constants/shadow_outline_size = 10
+theme_override_constants/outline_size = 10
+
+[node name="MoneyAndScore" parent="HUD" unique_id=2038700856 instance=ExtResource("10_hgpy0")]
+
+[node name="MoneyLossGain" parent="HUD" unique_id=399644331 instance=ExtResource("11_t2t4p")]
+visible = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1707965239]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=391615957]
+material = SubResource("ShaderMaterial_ikia7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Walls" type="Node2D" parent="." unique_id=1868779388]
+script = ExtResource("11_7yui6")
+
+[node name="TOP" type="StaticBody2D" parent="Walls" unique_id=1235188867]
+position = Vector2(-581, -308)
+collision_layer = 3
+collision_mask = 3
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TOP" unique_id=1834486919]
+rotation = -1.0471976
+shape = SubResource("WorldBoundaryShape2D_7yui6")
+
+[node name="RIGHT" type="StaticBody2D" parent="Walls" unique_id=742304226]
+position = Vector2(703, -303)
+collision_layer = 3
+collision_mask = 3
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RIGHT" unique_id=1812365501]
+shape = SubResource("WorldBoundaryShape2D_kn0ld")
+
+[node name="LEFT" type="StaticBody2D" parent="Walls" unique_id=1936806467]
+position = Vector2(-507, 291)
+collision_layer = 3
+collision_mask = 3
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LEFT" unique_id=248678508]
+shape = SubResource("WorldBoundaryShape2D_e0ngr")
+
+[node name="BOTTOM" type="StaticBody2D" parent="Walls" unique_id=100133353]
+position = Vector2(538, 272)
+collision_layer = 3
+collision_mask = 3
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BOTTOM" unique_id=540416637]
+rotation = -1.0471976
+shape = SubResource("WorldBoundaryShape2D_c5t2i")
+
+[node name="Door" parent="." unique_id=501344013 instance=ExtResource("10_ikia7")]
+position = Vector2(-440, -448)
+
+[node name="Toolbox2" parent="." unique_id=653820109 instance=ExtResource("11_c5t2i")]
+position = Vector2(432, -342)
+
+[node name="Counter" parent="." unique_id=1661481736 instance=ExtResource("12_7yui6")]
+position = Vector2(440, 192)
+
+[node name="BuildingMode" parent="." unique_id=1984526871 instance=ExtResource("13_c5t2i")]
+
+[node name="RentMoney" type="Timer" parent="." unique_id=1218800309]
+wait_time = 10.0
+autostart = true
+script = ExtResource("18_0pcbe")
+
+[node name="SpecialTimerSprite" parent="RentMoney" unique_id=1459655327 instance=ExtResource("19_axeuq")]
+
+[connection signal="timeout" from="RentMoney" to="RentMoney" method="_on_timeout"]

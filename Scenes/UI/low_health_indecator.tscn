@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://56ehtbp4uwfn"]
+
+[ext_resource type="Script" uid="uid://c2sai8jnvx8tb" path="res://Scripts/low_health_indecator.gd" id="1_0h641"]
+
+[node name="LowHealthIndecator" type="ColorRect" unique_id=1583154669]
+z_index = 4096
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.8400777, 0, 0.07846785, 0.158)
+script = ExtResource("1_0h641")
+
+[node name="DeathTimer" type="Timer" parent="." unique_id=1492406904]
+wait_time = 15.0
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

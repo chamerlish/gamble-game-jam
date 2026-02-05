@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://baexknk7mp0qk" path="res://Resources/SFX/score.wav" id="3_480u1"]
 
 [sub_resource type="Curve" id="Curve_bplui"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.48993295), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_480u1"]
@@ -19,6 +19,8 @@ initial_velocity_max = 75.0
 gravity = Vector3(0, 70, 0)
 damping_min = 28.000002
 damping_max = 28.000002
+scale_min = 10.0
+scale_max = 10.0
 scale_curve = SubResource("CurveTexture_480u1")
 
 [sub_resource type="Animation" id="Animation_whoue"]
@@ -84,9 +86,11 @@ _data = {
 [node name="ScoreAnimation" type="Node2D" unique_id=2024234427]
 script = ExtResource("1_bplui")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1002243282]
+[node name="BoomParticle" type="GPUParticles2D" parent="." unique_id=1002243282]
+z_index = 3000
 emitting = false
 amount = 20
+one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_whoue")
 

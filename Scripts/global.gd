@@ -14,7 +14,13 @@ signal mid_switch_night_state
 signal expand
 signal toolbox_use(value)
 signal event(event_id)
+signal finished_event
 signal scored(added_score, pos)
+signal money_changed(added_money, pos)
+signal no_pos_money_changed(added_money)
+
+signal win_money (amount, pos)
+signal loose_money (amount, pos)
 
 signal more_customer_event
 signal inputs_reversed_event
@@ -53,8 +59,24 @@ var score_multiplier: float = 1.0:
 		score_multiplier = value
 		_restart_multiplier_timer()
 
+var amount_score : int = 0
+
 var _multiplier_timer: SceneTreeTimer
 var _multiplier_token := 0
+
+func _ready() -> void:
+	
+	no_pos_money_changed.emit(0)
+	print(amount_money)
+	
+	loose_money.connect(_loose_money)
+	win_money.connect(_win_money)
+	scored.connect(func(added_score, pos): amount_score += added_score * score_multiplier; score_multiplier += 1)
+	event_loop()
+
+func event_loop():
+	await get_tree().create_timer(60).timeout
+	event.emit(randi_range(0, 3))
 
 func _restart_multiplier_timer():
 	_multiplier_token += 1
@@ -74,7 +96,11 @@ const MAX_DIFFICULTY: int = 8
 
 var camera_node: Camera2D
 
-var amount_money: float
+var amount_money: int = 300:
+	set(value):
+		amount_money = value
+		no_pos_money_changed.emit(value)
+		
 
 func cartesian_to_isometric(cartesian: Vector2) -> Vector2:
 	var iso = Vector2()
@@ -91,5 +117,10 @@ func change_night_state():
 	night = not Global.night
 	begin_switch_night_state.emit()
 
-func loose_money(amount: int) -> void:
+func _loose_money(amount: int, pos) -> void:
 	amount_money -= amount
+	money_changed.emit(-amount, pos)
+
+func _win_money(amount: int, pos) -> void:
+	amount_money += amount
+	money_changed.emit(amount, pos)

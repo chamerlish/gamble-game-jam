@@ -22,6 +22,8 @@ var input_inversed: bool
 
 func input_reverse():
 	input_inversed = true
+	await Global.finished_event
+	input_inversed = false
 
 func _ready() -> void:
 	Global.inputs_reversed_event.connect(input_reverse)

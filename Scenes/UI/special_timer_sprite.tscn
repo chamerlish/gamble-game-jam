@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bw4bmtg860o24"]
+
+[ext_resource type="Texture2D" uid="uid://f63gq24oco4g" path="res://Resources/Textures/clock-Sheet.png" id="1_enftr"]
+[ext_resource type="Script" uid="uid://bml0gwvj3kfsd" path="res://Scenes/UI/special_timer_sprite.gd" id="1_gfhd8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eoliq"]
+atlas = ExtResource("1_enftr")
+region = Rect2(0, 0, 128, 128)
+
+[node name="SpecialTimerSprite" type="CanvasLayer" unique_id=948487369]
+script = ExtResource("1_gfhd8")
+
+[node name="Control" type="Control" parent="." unique_id=342840732]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Sprite" type="TextureRect" parent="Control" unique_id=1322327719]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -128.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_eoliq")

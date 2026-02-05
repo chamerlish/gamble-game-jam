@@ -3,7 +3,7 @@ extends Area2D
 var player_inside: bool
 
 func _ready() -> void:
-	$AnimatedSprite2D.play("default")
+	$Sprite2D.frame = randi_range(0, 2)
 	#await get_tree().create_timer(0.1).timeout
 	
 	
@@ -27,6 +27,6 @@ func clear_trash():
 	scale.x = lerp(1.0, 1.7, 0.1)
 	await get_tree().create_timer(0.04).timeout
 	scale.y = lerp(1.0, 1.7, 0.1)
-	$AnimatedSprite2D.modulate.a = lerp(1.0, 0.0, 0.1)
+	$Sprite2D.modulate.a = lerp(1.0, 0.0, 0.1)
 	await get_tree().create_timer(0.08).timeout
 	queue_free()

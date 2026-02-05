@@ -46,12 +46,13 @@ func _ready() -> void:
 	
 	panel_tweak.hide()
 	GlobalMachine.all_machines_list.append(self)
-
+	
 func _process(delta: float) -> void:
 	if mouse_inside and placed:
 		if Input.is_action_just_pressed("click"):
 			level = min(level + 1, MAX_LEVEL)
-			Global.camera_node.trigger_shake()
+			print(10* 1+ 1/ Global.score_multiplier)
+			Global.camera_node.trigger_shake(10 * Global.score_multiplier)
 			update_sprite()
 	
 	if player_inside:
@@ -86,10 +87,25 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_released("rotate"):
 			sprite.frame_coords.x = (sprite.frame_coords.x + 1) % 4
 			resolve_collisions()
-		if event.is_action_released("click"):
+		if event.is_action_released("click") and can_place:
 			place_machine()
-		
+
+var can_place: bool = true
+
 func placable_mode():
+	var areas = $OverlappingArea.get_overlapping_areas()
+	var bodies = $OverlappingArea.get_overlapping_areas()
+	
+	
+	
+	if areas.size() > 0 and bodies.size() > 0:
+		print(areas[0])
+		can_place = false
+		modulate = Color(0.9, 0.1, 0.1)
+	else:
+		can_place = true
+		modulate = Color(1, 1, 1)
+	
 	var mouse_pos = get_global_mouse_position().snapped(Global.TILE_SIZE)
 	
 	_left_right_collision.disabled = true
@@ -109,24 +125,12 @@ func place_machine():
 	
 	resolve_collisions()
 
-	Global.camera_node.trigger_shake()
+	Global.camera_node.trigger_shake(10 * Global.score_multiplier)
 	GlobalMachine.placed_machine_list.append(self)
 	GlobalMachine.available_machine_list.append(self)
-	loose_money(price)
+	Global.loose_money.emit(price, global_position)
 
 
-@onready var money_loss_label = $HUD/MouseFollow/MoneyLossText
-@onready var money_gain_label = $HUD/MouseFollow/MoneyGainText
-
-func loose_money(amount: int):
-	$HUD/MouseFollow.global_position = get_global_mouse_position()
-	money_loss_label.text = "- " + str(amount) + " $"
-	$AnimationPlayer.play("money_loss")
-
-func win_money(amount: float):
-	$HUD/MouseFollow.global_position = get_global_mouse_position()
-	money_gain_label.text = "+ " + str(amount) + " $"
-	$AnimationPlayer.play("money_gain")
 
 func break_machine():
 	broken = true

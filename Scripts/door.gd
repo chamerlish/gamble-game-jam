@@ -21,6 +21,12 @@ func more_customer():
 	wave_delay.wait_time = 3
 	wave_delay.start()
 	
+	await Global.finished_event
+	wave_delay.stop()
+	on_spawn_rush = false
+	wave_delay.wait_time = 10
+	wave_delay.start()
+	
 
 func expand() -> void:
 	position.x -= Global.TILE_SIZE.y + Global.GRID_SIZE.y / 4
@@ -44,7 +50,7 @@ func spawn_customer(nums_cus: int) -> void:
 		await get_tree().create_timer(1/ float(Global.difficulty)).timeout
 
 func generate_next_wave() -> int:
-	return randi_range(2, 2 + Global.difficulty)
+	return randi_range(2, 2 + Global.difficulty * 2)
 
 func _on_wave_delay_timeout() -> void:
 	print("he")

@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dt6p422xmw76f" path="res://Resources/Sprites/Rarities/trash-anime-sheet.png" id="1_c2mmk"]
 [ext_resource type="Script" uid="uid://c6rh36nrq4gob" path="res://Scripts/trash.gd" id="1_tsx7w"]
+[ext_resource type="Texture2D" uid="uid://fbaw8yqxh8vc" path="res://Resources/Sprites/Rarities/trash.png" id="3_3xsam"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tsx7w"]
 atlas = ExtResource("1_c2mmk")
@@ -54,12 +55,18 @@ z_index = -1
 script = ExtResource("1_tsx7w")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=886819255]
+visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ws752")
 frame_progress = 0.532367
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1319428755]
 shape = SubResource("CircleShape2D_ws752")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=189171332]
+texture_filter = 1
+texture = ExtResource("3_3xsam")
+hframes = 3
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

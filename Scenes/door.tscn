@@ -13,7 +13,7 @@ texture_filter = 1
 texture = ExtResource("1_w6aom")
 
 [node name="WaveDelay" type="Timer" parent="." unique_id=1606209738]
-wait_time = 30.0
+wait_time = 10.0
 autostart = true
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=1844637678]

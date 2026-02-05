@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://b3jhhdhkfidhc"]
+
+[ext_resource type="Script" uid="uid://ccwr4dpjjh70t" path="res://Scripts/money_and_score.gd" id="1_60pra"]
+[ext_resource type="Theme" uid="uid://d2s335cjhu88y" path="res://Resources/UI/base_theme.tres" id="1_srrex"]
+
+[node name="MoneyAndScore" type="MarginContainer" unique_id=2038700856]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 2.0
+offset_bottom = 82.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("1_60pra")
+
+[node name="ScoreLabel" type="RichTextLabel" parent="." unique_id=1533921182]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_srrex")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 40
+text = "Score:"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyLabel" type="RichTextLabel" parent="." unique_id=792494796]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_srrex")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 40
+text = "Money: "
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
